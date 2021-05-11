@@ -19,11 +19,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
-<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;mrliduanyang.github.io&quot;,&quot;root&quot;:&quot;&#x2F;blog&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;blog&#x2F;images&quot;,&quot;scheme&quot;:&quot;Mist&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;blog.duanyang.cool&quot;,&quot;root&quot;:&quot;&#x2F;blog&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;blog&#x2F;images&quot;,&quot;scheme&quot;:&quot;Mist&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
 <meta name="description" content="相信很多读者在学习排序算法的时候，理解并背下了快速排序和归并排序的代码。而对于堆排序可能了解不多，对堆的印象可能只停留在大顶堆堆顶元素最大，小顶堆堆顶元素最小。但其实，堆排序才是个人认为的原理最简单、代码最简洁的一种优秀排序算法。 0. 完全二叉堆在深入了解堆之前，可以先想这么一个问题，堆长什么样？有的读者会觉得，（大顶）堆堆顶元素最大，然后它的左右孩子比它小，所以应该是树怎么存，它就怎么存吧。用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="堆和堆排序">
-<meta property="og:url" content="https://mrliduanyang.github.io/blog/2021/03/20/%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:url" content="https://blog.duanyang.cool/blog/2021/03/20/%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/index.html">
 <meta property="og:site_name" content="N.O的个人技术备忘">
 <meta property="og:description" content="相信很多读者在学习排序算法的时候，理解并背下了快速排序和归并排序的代码。而对于堆排序可能了解不多，对堆的印象可能只停留在大顶堆堆顶元素最大，小顶堆堆顶元素最小。但其实，堆排序才是个人认为的原理最简单、代码最简洁的一种优秀排序算法。 0. 完全二叉堆在深入了解堆之前，可以先想这么一个问题，堆长什么样？有的读者会觉得，（大顶）堆堆顶元素最大，然后它的左右孩子比它小，所以应该是树怎么存，它就怎么存吧。用">
 <meta property="og:locale" content="zh_CN">
@@ -39,11 +39,11 @@
 <meta name="twitter:image" content="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210320134454.png">
 
 
-<link rel="canonical" href="https://mrliduanyang.github.io/blog/2021/03/20/%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/">
+<link rel="canonical" href="https://blog.duanyang.cool/blog/2021/03/20/%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;mrliduanyang.github.io&#x2F;blog&#x2F;2021&#x2F;03&#x2F;20&#x2F;%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;03&#x2F;20&#x2F;堆和堆排序&#x2F;&quot;,&quot;title&quot;:&quot;堆和堆排序&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;blog.duanyang.cool&#x2F;blog&#x2F;2021&#x2F;03&#x2F;20&#x2F;%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;03&#x2F;20&#x2F;堆和堆排序&#x2F;&quot;,&quot;title&quot;:&quot;堆和堆排序&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
 <title>堆和堆排序 | N.O的个人技术备忘</title><script src="/blog/js/config.js"></script>
@@ -191,7 +191,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://mrliduanyang.github.io/blog/2021/03/20/%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/">
+    <link itemprop="mainEntityOfPage" href="https://blog.duanyang.cool/blog/2021/03/20/%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
