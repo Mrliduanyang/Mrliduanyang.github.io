@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;example.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Muse&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<meta property="og:type" content="website">
+<meta property="og:title" content="N.O的个人技术备忘">
+<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:site_name" content="N.O的个人技术备忘">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Mrliduanyang">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/page/2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:true,&quot;isPost&quot;:false,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:&quot;&quot;,&quot;permalink&quot;:&quot;&quot;,&quot;path&quot;:&quot;page&#x2F;2&#x2F;index.html&quot;,&quot;title&quot;:&quot;&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>N.O的个人技术备忘</title><script src="/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">N.O的个人技术备忘</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mrliduanyang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/29/%E9%80%92%E5%BD%92%E5%86%99%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mrliduanyang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="N.O的个人技术备忘">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/01/29/%E9%80%92%E5%BD%92%E5%86%99%E6%B3%95/" class="post-title-link" itemprop="url">递归问题解题技巧</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-29 16:06:16" itemprop="dateCreated datePublished" datetime="2021-01-29T16:06:16+08:00">2021-01-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-05-11 13:09:11" itemprop="dateModified" datetime="2021-05-11T13:09:11+08:00">2021-05-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>LeetCode上的递归类型题目往往都是难度中等，但代码巧妙简洁。本文带大家总结一下递归问题的解题技巧。关于如何分析递归问题，设计递归算法的内容，网上已有很多，这里就不再详细讲解。</p>
+<h2 id="0-递归问题简要分析"><a href="#0-递归问题简要分析" class="headerlink" title="0.递归问题简要分析"></a>0.递归问题简要分析</h2><p>根据个人总结，递归程序应用最广泛的场景就是树，而所用的算法又往往是深度优先。因为树和深度优先遍历的结合实在是太契合。首先，树的每个父节点和他的子节点之间，可以把以子节点为根的子树看做父节点树的子问题，对子树的求解和对父节点树的求解思路完全一致，并且叶子节点子问题的求解可以当作是递归终止条件。这三点完全符合递归使用的三个条件。而深度优先算法又是从一个点出发，往深处去“钻”，“钻”到底之后再往回走，这个过程跟递归的调用过程也是很像的。因此，我们主要采用<strong>树+深度优先</strong>类型的题目来讲解递归技巧。</p>
+<h2 id="1-递归问题求解"><a href="#1-递归问题求解" class="headerlink" title="1.递归问题求解"></a>1.递归问题求解</h2><p>拿到一道<strong>树+深度优先</strong>的题目后，几乎可以肯定这题是能用递归来解的，所以接下来的难点就是设计递归函数。而在设计递归函数的时候，个人总结了四点设计原则：</p>
+<ul>
+<li>确定递归函数有无返回值。</li>
+<li>确定递归函数的功能。</li>
+<li>只关注当下。千万不要铺开模拟递归的过程，找到当前问题和其子问题的关系即可，无需再去研究子问题的求解过程。</li>
+<li>最大&amp;最小问题验证。用最大规模问题验证递归程序的正确性。用最小规模的问题来验证递归终止条件，并和它的上一级问题一起来验证递归正确性。</li>
+</ul>
+<h2 id="2-树-深度优先递归实战"><a href="#2-树-深度优先递归实战" class="headerlink" title="2.树+深度优先递归实战"></a>2.树+深度优先递归实战</h2><h3 id="2-1-LeetCode-110-平衡二叉树"><a href="#2-1-LeetCode-110-平衡二叉树" class="headerlink" title="2.1  LeetCode 110. 平衡二叉树"></a>2.1 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/balanced-binary-tree/"> LeetCode 110. 平衡二叉树</a></h3><blockquote>
+<p>给定一个二叉树，判断它是否是高度平衡的二叉树。</p>
+<p>本题中，一棵高度平衡二叉树定义为：</p>
+<p>一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1 。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210124160937.jpeg" alt="img"></p>
+<p><strong>输入：</strong>root = [3,9,20,null,null,15,7]<br><strong>输出：</strong>true</p>
+<p><strong>示例 2：</strong></p>
+<p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210125123111.jpeg" alt="img"></p>
+<p><strong>输入：</strong>root = [1,2,2,3,3,null,null,4,4]<br><strong>输出：</strong>false</p>
+<p><strong>示例 3：</strong></p>
+<p><strong>输入：</strong>root = []<br><strong>输出：</strong>true</p>
+</blockquote>
+<p>使用四原则来分析上面的问题。</p>
+<ul>
+<li>首先，判断以一个节点为根的树是否是平衡二叉树，需要获取它的左右子树的高度，所以可以确定，递归函数是有返回值的，需要返回树的高度、以及树是否是平衡二叉树。</li>
+<li>其次，递归函数的功能可以确定是获取以传入节点为根的树的高度和判断树的平衡性。</li>
+<li>然后分析，假如已知一个节点A，它的子节点是B、C，并且已知子树B、C是平衡二叉树且B、C的高度分别是b、c，那么，只要b、c之差的绝对值不大于1，则可以判定A是一个平衡二叉树。</li>
+<li>最后，易知最大规模问题在该递归程序上求解是正确的，而对于叶子节点的子节点（最小规模问题）来说，它的高度是0，所以叶子节点和它的孩子节点（null）构成的树也是平衡的，验证了正确性和终止条件。</li>
+</ul>
+<p>根据以上分析，我们写出解决该问题的递归程序代码。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">bool</span> <span class="title">IsBalanced</span>(<span class="params">TreeNode root</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 该递归函数功能是计算树的高度和判断树的平衡性</span></span><br><span class="line">    (<span class="built_in">int</span> height, <span class="built_in">bool</span> isBalanced) Helper(TreeNode root) &#123;</span><br><span class="line">        <span class="comment">// 递归终止条件</span></span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> (<span class="number">0</span>, <span class="literal">true</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">var</span>(lHeight, lBalanced) = Helper(root.left);</span><br><span class="line">            <span class="keyword">var</span>(rHeight, rBalanced) = Helper(root.right);</span><br><span class="line">            <span class="comment">// 当前树的高度等于它的子树中最高的高度+1</span></span><br><span class="line">            <span class="comment">// 当前树的子树高度之差不大于1并且子树都是平衡二叉树，则当前树是一棵平衡二差树</span></span><br><span class="line">            <span class="keyword">return</span> (Math.Max(lHeight, rHeight) + <span class="number">1</span>, Math.Abs(lHeight - rHeight) &lt;= <span class="number">1</span> &amp;&amp; lBalanced &amp;&amp; rBalanced);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 初始化调用递归函数</span></span><br><span class="line">    <span class="keyword">return</span> Helper(root).isBalanced;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-LeetCode-543-二叉树的直径"><a href="#2-2-LeetCode-543-二叉树的直径" class="headerlink" title="2.2 LeetCode 543. 二叉树的直径"></a>2.2 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/diameter-of-binary-tree/">LeetCode 543. 二叉树的直径</a></h3><blockquote>
+<p>给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过也可能不穿过根结点。</p>
+<p><strong>示例 ：</strong><br>给定二叉树</p>
+<pre><code>          1
+         / \
+        2   3
+       / \     
+      4   5  
+</code></pre>
+<p>返回 <strong>3</strong>, 它的长度是路径 [4,2,1,3] 或者 [5,2,1,3]。</p>
+</blockquote>
+<p>这道题表面是求树的直径，但本质是要求树的高度。因为根据题目定义，如果在递归程序中返回树的直径，那么父问题是没法根据子问题的解来求的。但如果返回树的高度，那么可以根据子问题的解来获得父问题的解，并且可以间接求得问题的解。</p>
+<p>使用四原则来分析上面的问题。</p>
+<ul>
+<li>首先，计算以一个节点为根的树的直径，需要获取它的左右子树的高度，所以可以确定，递归函数是有返回值的，需要返回树的高度。</li>
+<li>其次，递归函数的功能可以确定是获取以传入节点为根的树的高度。</li>
+<li>然后分析，假如已知一个节点A，它的子节点是B、C，并且已知子树B、C的高度分别是b、c，那么，子树A的高度为max(b, c)+1。而子树A的直径为b+c+1。</li>
+<li>最后，易知最大规模问题在该递归程序上求解是正确的，而对于叶子节点的子节点（最小规模问题）来说，它的直径是0，也就可以确定递归终止条件。</li>
+</ul>
+<p>根据以上分析，我们写出解决该问题的递归程序代码。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">DiameterOfBinaryTree</span>(<span class="params">TreeNode root</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 记录全局最大直径</span></span><br><span class="line">    <span class="built_in">int</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 该递归函数功能是计算树的高度</span></span><br><span class="line">    <span class="function"><span class="built_in">int</span> <span class="title">Helper</span>(<span class="params">TreeNode root</span>)</span> &#123;</span><br><span class="line">        <span class="comment">// 递归终止条件</span></span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">int</span> l = Helper(root.left);</span><br><span class="line">        <span class="built_in">int</span> r = Helper(root.right);</span><br><span class="line">        <span class="comment">// 更新全局最大直径</span></span><br><span class="line">        ans = Math.Max(ans, l + r + <span class="number">1</span>);</span><br><span class="line">        <span class="comment">// 计算以当前节点为根的树高度</span></span><br><span class="line">        <span class="keyword">return</span> Math.Max(l, r) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Helper(root);</span><br><span class="line">    <span class="keyword">return</span> ans - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-LeetCode-965-单值二叉树"><a href="#2-3-LeetCode-965-单值二叉树" class="headerlink" title="2.3 LeetCode 965. 单值二叉树"></a>2.3 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/univalued-binary-tree/">LeetCode 965. 单值二叉树</a></h3><blockquote>
+<p>如果二叉树每个节点都具有相同的值，那么该二叉树就是单值二叉树。</p>
+<p>只有给定的树是单值二叉树时，才返回 true；否则返回 false。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210124204410.png" alt="img"></p>
+<p><strong>输入：</strong>[1,1,1,1,1,null,1]<br><strong>输出：</strong>true</p>
+<p><strong>示例 2：</strong></p>
+<p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210124204417.png" alt="img"></p>
+<p><strong>输入：</strong>[2,2,2,5,2]<br>输出：false</p>
+</blockquote>
+<p>使用四原则来分析上面的问题。</p>
+<ul>
+<li>首先，判断以一个节点为根的树的是否是单值二叉树，需要获取它的左右子树的单值性，所以可以确定，递归函数是有返回值的，需要返回树的单值性。</li>
+<li>其次，递归函数的功能可以确定是获取以传入节点为根的树的单值性。</li>
+<li>然后分析，假如已知一个节点A，它的子节点是B、C，并且已知子树B、C都是单值二叉树，那么，只要节点A的值等于指定的值，则A是一个单值二叉树。</li>
+<li>最后，易知最大规模问题在该递归程序上求解是正确的，而对于叶子节点的子节点（最小规模问题）来说，它单值性为true，所以只要叶子节点值等于指定的值就可以它的孩子节点（null）构成单值二叉树，验证了正确性和终止条件。</li>
+</ul>
+<p>根据以上分析，我们写出解决该问题的递归程序代码。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">bool</span> <span class="title">IsUnivalTree</span>(<span class="params">TreeNode root</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">int</span> val = root.val;</span><br><span class="line">    <span class="function"><span class="built_in">bool</span> <span class="title">Helper</span>(<span class="params">TreeNode root</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">var</span> left = Helper(root.left);</span><br><span class="line">        <span class="keyword">var</span> right = Helper(root.right);</span><br><span class="line">        <span class="keyword">return</span> left &amp;&amp; right &amp;&amp; root.val == val;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Helper(root);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3.总结"></a>3.总结</h2><p>这三道都是难度为简单的<strong>递归+树+深度优先</strong>套路的题目。对于理解递归的思想很有帮助，并且当想尝试展开递归过程，理解递归细节时也没有太大难度。但当从更抽象的角度来看这三道题，就会发现，这三道题更本质的特征是树的后序遍历，都是先获取了左右子树的结果，然后在根的位置处理左右子树的结果。感兴趣的读者可以想想分治法、递归、深度优先、树、后序遍历之间的关系。后续文章将会给大家带来其他形式的递归问题分析。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mrliduanyang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="N.O的个人技术备忘">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/12/01/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB/" class="post-title-link" itemprop="url">记一次中间人攻击</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-01 08:46:58" itemprop="dateCreated datePublished" datetime="2020-12-01T08:46:58+08:00">2020-12-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-05-11 13:09:11" itemprop="dateModified" datetime="2021-05-11T13:09:11+08:00">2021-05-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/" itemprop="url" rel="index"><span itemprop="name">杂七杂八</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="0x00前言"><a href="#0x00前言" class="headerlink" title="0x00前言"></a>0x00前言</h2><p>因为疫情防控原因，进出学校需要提前申请，之后在校门口处扫码验证。在之前一段时间，申请比较容易，无需辅导员审核。但后来由于疫情反弹，审核变的复杂了。但这难不倒聪明的打工人。</p>
+<h2 id="0x01抓包分析"><a href="#0x01抓包分析" class="headerlink" title="0x01抓包分析"></a>0x01抓包分析</h2><p>进出扫码用的APP，是一个网页+套壳浏览器的形式，所有的用户界面，本质都是网页。因此，从理论上讲，只要修改服务器的响应数据，就可以将页面修改为任何我们想要的效果，自然也包括把原本的验证失败改为验证成功。</p>
+<p>之前有过用<em>Fiddler</em>抓包的经验，打开<em>Fiddler</em>，设置代理，手机和电脑连接同一个<em>WiFi</em>并手动设置代理，这样手机上的所有流量便会通过代理进行转发。<em>Fiddler</em>提供了很便捷的脚本来处理请求和响应数据，按照教程对指定<em>URL</em>请求的<em>Response</em>进行修改，替换掉其<em>HTML</em>中的部分数据即可达到需求。</p>
+<p>但上述验证都是在局域网环境中完成的，真正在校门口扫码时不可能连接上自己的局域网，但又想到，学校是有校园网的，校园网中的设备都会分配到一个内网<em>ip</em>，于是把电脑和手机都切换到校园网中，并手动设置<em>ip</em>使之在同一个网段。但没想到的是，校园网中大概做了<em>AP</em>隔离，设备之间是无法访问的，没办法，只能在公网搭建服务了。</p>
+<h2 id="0x02应用部署"><a href="#0x02应用部署" class="headerlink" title="0x02应用部署"></a>0x02应用部署</h2><p>在公网部署的话，肯定不能像之前一样安装<em>Fiddler</em>软件了，而且<em>Fiddler</em>也不提供调用接口，没法用代码来处理请求及响应数据。搜索之后发现<em>mitmproxy</em>是一个很经典的中间人工具代理工具，并且提供了<em>Python</em>接口。<strong>纸上谈来终觉浅</strong>，坑太多了，一言难尽。想多废话几句，先是在<em>Windows</em>主机安装，但安装后手机连接不上代理，一度怀疑是工具的问题。转而在<em>WSL</em>里安装，安装后启动，还是无法连接。更加怀疑是工具问题。一度想要换个工具的时候，又倔强的在一个独立的<em>Ubuntu</em>开发板上安装了一下，惊了，竟然可以。又转头去<em>WSL</em>中用<em>cURL</em>带着代理参数测试请求，也可以，说明代理没问题，就是因为其他原因连接不上。排查过程过于智障，就不在此表述了。总的就是，<em>Windows</em>防火墙没有添加端口的入站规则，<em>WSL</em>的<em>ip</em>和主机的<em>ip</em>不是一个，虽然他们的共用端口。解决完连接问题，剩下的就简单了，按照<em>mitmproxy</em>的教程，编写<em>Python</em>代码，对指定接口的响应数据做修改，又因为涉及到对页面元素的增、删、改，所以又用了<em>BeautifulSoup</em>来处理。</p>
+<p>部署完，验证好用，**(command &amp;)**丢后台运行了，然后把使用说明分享给小伙伴啦！</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/02/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E8%88%AC%E5%8C%96%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mrliduanyang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="N.O的个人技术备忘">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/11/02/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E8%88%AC%E5%8C%96%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">动态规划问题的一般化分析方法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-11-02 18:55:21" itemprop="dateCreated datePublished" datetime="2020-11-02T18:55:21+08:00">2020-11-02</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-05-11 13:09:11" itemprop="dateModified" datetime="2021-05-11T13:09:11+08:00">2021-05-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>身为一个准程序员，不刷题是不可能的。我是看了labuladong东哥的系列文章才开始上LeetCode刷题。把东哥的文章的过了两遍以后，开始上手做树相关的题，树的做了一些后，又做了回溯法的，最近准备肯动态规划这个绕不过去的硬骨头。先做了一道<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths/">62. 不同路径</a> ，虽然是一道中等难度，但这个的状态转移以及dp数组的定义一眼就看出来。即使是该题的升级版<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths-ii/">63. 不同路径 II</a> 也不过是调整dp数组的base以及在状态转移过程中添加一些判断。但这种一眼看穿的方法到了<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/target-sum/">494. 目标和</a> 就不太行了，状态转移方程看不出来了。但经过我的分析，该题还是被解决了。在该过程中总结了一点分析动态规划问题的一般化方法。</p>
+<h2 id="0x01一般化方法"><a href="#0x01一般化方法" class="headerlink" title="0x01一般化方法"></a>0x01一般化方法</h2><p>拿到一道动态规划题目，可以先用自顶向下的方法分析。以题目中的测试样例为例，我们的目标是用5个1凑出3，我们假定在最后一个1前添加**+<strong>号，那么子问题就变成用4个1凑出2；同理，如果假定在最后一个1前添加</strong>-<strong>号，那么子问题就变成用4个1凑出4。所以dp数组的定义是什么呢？那就是用i个1凑出j的解有多少个。有了dp数组的定义，我们就很容易得到正确的状态转移，如：</strong>dp[5, 3] = dp[4, 2] + dp[4, 4]** 。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/06/14/%E5%BE%AE%E4%BF%A1JS-SDK%E7%AD%BE%E5%90%8D%E7%AE%97%E6%B3%95%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mrliduanyang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="N.O的个人技术备忘">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/06/14/%E5%BE%AE%E4%BF%A1JS-SDK%E7%AD%BE%E5%90%8D%E7%AE%97%E6%B3%95%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">微信JS-SDK签名算法部署方案</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-06-14 16:53:24" itemprop="dateCreated datePublished" datetime="2020-06-14T16:53:24+08:00">2020-06-14</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-05-11 13:09:11" itemprop="dateModified" datetime="2021-05-11T13:09:11+08:00">2021-05-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="0x00-遇到的问题"><a href="#0x00-遇到的问题" class="headerlink" title="0x00 遇到的问题"></a>0x00 遇到的问题</h2><p>在业务中，遇到一个需要调用微信客户端扫码功能的场景，查阅资料发现需要使用微信JS-SDK来调用微信的扫一扫功能。但在调用JS-SDK中接口时，需要提供签名校验。在部署该签名算法的过程中遇到几个问题，记录一下，以作备忘。</p>
+<h2 id="0x01-解决方案"><a href="#0x01-解决方案" class="headerlink" title="0x01 解决方案"></a>0x01 解决方案</h2><p>按微信官方的解决方案去自己实现签名服务是不可能的，要有不造轮子的觉悟。直接从GitHub上搜索可行的签名服务，有用PHP写的，有用Go写的。选了一个NodeJs写的<a target="_blank" rel="noopener" href="https://github.com/givebest/node.js-wechat-js-sdk">node.js-wechat-js-sdk</a>，装好Node环境，配置appid、appsecret，启动运行。测试签名服务自带的实例程序，扫一扫功能可以调用。开始考虑把签名服务应用在自己的业务中。</p>
+<p>业务主要是静态页面，放在Nginx服务器上。因此签名服务只能部署在非80端口，在静态页中，通过请求服务的方式调用。在部署过程中，需要注意按照微信文档文档的教程配置非签名的部分。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/05/06/JavaScript%E5%88%A4%E5%AE%9A%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E9%A1%B5%E9%9D%A2%E5%88%B7%E6%96%B0%E4%B8%8E%E5%85%B3%E9%97%AD%E6%A0%87%E7%AD%BE%E9%A1%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mrliduanyang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="N.O的个人技术备忘">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/05/06/JavaScript%E5%88%A4%E5%AE%9A%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E9%A1%B5%E9%9D%A2%E5%88%B7%E6%96%B0%E4%B8%8E%E5%85%B3%E9%97%AD%E6%A0%87%E7%AD%BE%E9%A1%B5/" class="post-title-link" itemprop="url">JavaScript判定浏览器中页面刷新与关闭标签页</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-05-06 21:23:52" itemprop="dateCreated datePublished" datetime="2020-05-06T21:23:52+08:00">2020-05-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-05-11 13:09:11" itemprop="dateModified" datetime="2021-05-11T13:09:11+08:00">2021-05-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="0x00-原理概述"><a href="#0x00-原理概述" class="headerlink" title="0x00 原理概述"></a>0x00 原理概述</h2><p>借助LocalStorage和onunload事件。<br>LocalStorage中存储数据可以长期保留，除非被手动清除。<br>浏览器在关闭页面和刷新页面时，都会触发onunload事件。所以可以在onunload事件中将时间戳存储在LocalStorage中，间接实现对页面刷新和关闭的判断。</p>
+<h2 id="0x01-实现"><a href="#0x01-实现" class="headerlink" title="0x01 实现"></a>0x01 实现</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    let lastTime = localStorage.getItem(&#x27;lastTime&#x27;)</span><br><span class="line">    let currentTime = new Date().getTime()</span><br><span class="line">    if ((currentTime - lastTime) &lt; 5000) &#123;</span><br><span class="line">        console.log(&#x27;Refresh&#x27;)</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        console.log(&#x27;Close&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">    window.onunload = function () &#123;</span><br><span class="line">        localStorage.setItem(&#x27;lastTime&#x27;, new Date().getTime())</span><br><span class="line">    &#125; </span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>代码分析：</p>
+<p>当页面第一次载入时，<code>locaStorage</code>中没有<code>lastTime</code>，所以<code>if</code>条件不成立，会先执行一次关闭时代码。</p>
+<p>当页面刷新时，首先触发<code>onunload</code>事件，在<code>onunload</code>中，将时间戳存放在<code>localStorage</code>中。之后页面开始刷新，刷新之后立即从<code>localStorage</code>中获取页面刷新前存放的时间戳<code>lastTime</code>，并与页面刷新后的时间戳<code>currentTime</code>做比较，若差值小于5000，则认为页面是刷新。</p>
+<p>当关闭页面时，首先触发<code>onunload</code>事件，在<code>onunload</code>中，将时间戳存放在<code>localStorage</code>中，之后页面被关闭。当页面再次被打开时立即从<code>localStorage</code>中获取页面刷新前存放的时间戳<code>lastTime</code>，并与当前页面的时间戳<code>currentTime</code>做比较，若差值大于5000，则认为之前页面被关闭，执行一次关闭时代码。</p>
+<p>代码也是有逻辑漏洞的。第一次加载时，便会执行关闭时代码；页面关闭后，其实是没有执行关闭时代码的，而是当下次再打开页面，判断和上次关闭的时间间隔大于阈值时才执行关闭时代码。也就是说，当打开、关闭页面的时间间隔小于阈值时，还是会被认为是刷新。当时间间隔大于阈值，才被认为是关闭。</p>
+<p>代码仅供参考。反正是实现了我的需求——在页面刷新时不清除<code>LocalStorage</code>中数据，在页面<code>关闭</code>时清除<code>LocalStorage</code>中数据。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/05/06/ElementUI%E5%BC%80%E5%8F%91CSS%E6%A0%B7%E5%BC%8F%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mrliduanyang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="N.O的个人技术备忘">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/05/06/ElementUI%E5%BC%80%E5%8F%91CSS%E6%A0%B7%E5%BC%8F%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">ElementUI开发CSS样式问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-05-06 20:34:32" itemprop="dateCreated datePublished" datetime="2020-05-06T20:34:32+08:00">2020-05-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-05-11 13:09:11" itemprop="dateModified" datetime="2021-05-11T13:09:11+08:00">2021-05-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="0x00-遇见的问题"><a href="#0x00-遇见的问题" class="headerlink" title="0x00 遇见的问题"></a>0x00 遇见的问题</h2><p>最近基于Element UI开发项目，遇到了一个不大不小的问题。在Dev环境中，自己写的CSS样式是可以覆盖掉Element中的样式，但在Prod环境中，却出现了自己的样式被Element覆盖掉的情况。</p>
+<h2 id="0x01-原因"><a href="#0x01-原因" class="headerlink" title="0x01 原因"></a>0x01 原因</h2><p>从网上找了一下原因，主要是因为Dev环境和Prod环境，CSS样式的设置方式不一样导致。具体来说，Dev环境里是通过js append style标签来加入你的Element的样式，而Prod环境Element基础样式是通过link的方式引入的。</p>
+<h2 id="0x02-解决方案"><a href="#0x02-解决方案" class="headerlink" title="0x02 解决方案"></a>0x02 解决方案</h2><p>在 src 目录下，找到main.js文件并打开，将import ‘element-ui/lib/theme-chalk/index.css’;和import App from ‘./App’;顺序调换一下即可，将Element Ui的CSS的样式放到最前面。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/05/06/Nginx%E7%AB%AF%E5%8F%A3%E5%A4%8D%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mrliduanyang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="N.O的个人技术备忘">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/05/06/Nginx%E7%AB%AF%E5%8F%A3%E5%A4%8D%E7%94%A8/" class="post-title-link" itemprop="url">Nginx端口复用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-05-06 20:32:21" itemprop="dateCreated datePublished" datetime="2020-05-06T20:32:21+08:00">2020-05-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-05-11 13:09:11" itemprop="dateModified" datetime="2021-05-11T13:09:11+08:00">2021-05-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="0x00-遇到的问题"><a href="#0x00-遇到的问题" class="headerlink" title="0x00 遇到的问题"></a>0x00 遇到的问题</h2><p>想把自己的多个单页应用（SPA）部署在线上nginx服务器上运行，但是80端口只有一个，不可能把所有的应用都放在nginx根目录下运行。于是想到了通过路径对应用加以划分，从而实现端口复用。</p>
+<h2 id="0x01-解决方案"><a href="#0x01-解决方案" class="headerlink" title="0x01 解决方案"></a>0x01 解决方案</h2><p>利用nginx可以配置多个location的功能，为每一个单页应用配置自己的location，从而实现通过不同的路径访问不同应用的目的。nginx配置如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       &#x27;your port&#x27;;</span><br><span class="line">    server_name  &#x27;your ip&#x27;;</span><br><span class="line"></span><br><span class="line">    location  /app1 &#123;</span><br><span class="line">        alias /var/www/path1;</span><br><span class="line">        index index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location  /app2 &#123;</span><br><span class="line">        alias /var/www/path2;</span><br><span class="line">        index index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location  /image &#123;</span><br><span class="line">        alias /var/www/image;</span><br><span class="line">        index index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>这里需要注意的是nginx里location配置中root和alias的区别</strong></p>
+<blockquote>
+<p>root和alias是系统文件路径的设置。<br>root用来设置根目录，而alias用来重置当前文件的目录。</p>
+</blockquote>
+<p>可以参考下面例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">location /img/ &#123;</span><br><span class="line">    alias /var/www/image/;</span><br><span class="line">&#125;</span><br><span class="line">#若按照上述配置的话，则访问/img/目录里面的文件时，ningx会自动去/var/www/image/目录找文件</span><br><span class="line"></span><br><span class="line">location /img/ &#123;</span><br><span class="line">    root /var/www/image;</span><br><span class="line">&#125;</span><br><span class="line">#若按照这种配置的话，则访问/img/目录下的文件时，nginx会去/var/www/image/img/目录下找文件。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ZHangFFYY/article/details/78494637">nginx 中配置多个location并解决js/css/jpg/等的加载问题</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/05/06/Vue%E4%BF%AE%E6%94%B9%E6%89%93%E5%8C%85%E5%90%8E%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%B7%AF%E5%BE%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mrliduanyang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="N.O的个人技术备忘">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/05/06/Vue%E4%BF%AE%E6%94%B9%E6%89%93%E5%8C%85%E5%90%8E%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%B7%AF%E5%BE%84/" class="post-title-link" itemprop="url">Vue修改打包后静态资源路径</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-05-06 18:58:55" itemprop="dateCreated datePublished" datetime="2020-05-06T18:58:55+08:00">2020-05-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-05-11 13:09:11" itemprop="dateModified" datetime="2021-05-11T13:09:11+08:00">2021-05-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="0x00-遇到的问题"><a href="#0x00-遇到的问题" class="headerlink" title="0x00 遇到的问题"></a>0x00 遇到的问题</h2><p>在nginx上部署Vue项目时，如果将项目直接放在nginx根目录下，客户端访问正常。如果放在子目录下，客户端访问的时候会出现资源加载失败的问题。究其原因，是因为Vue-Cli在对资源进行打包时，都是用的绝对路径，部署在nginx服务器上，对应的就是nginx的根目录。所以导致当项目部署在子目录下的时候无法从子目录加载资源文件。</p>
+<h2 id="0x01-可行的解决方案"><a href="#0x01-可行的解决方案" class="headerlink" title="0x01 可行的解决方案"></a>0x01 可行的解决方案</h2><h3 id="1-修改为绝对路径"><a href="#1-修改为绝对路径" class="headerlink" title="1.修改为绝对路径"></a>1.修改为绝对路径</h3><p>在Vue项目config -&gt; index.js配置文件中。build时默认的资源打包路径为<code>assetsPublicPath: &#39;/&#39;</code>这个’/‘对应着nginx的根目录，所以我们将其修改为nginx配置文件中访问项目的路径即可。如我的nginx路径配置如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location  /weather &#123;</span><br><span class="line">    alias /var/www/Weather/;</span><br><span class="line">    index index.html index.htm;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么对应的assetsPublicPath为’/weather/‘。</p>
+<h3 id="2-修改为相对路径"><a href="#2-修改为相对路径" class="headerlink" title="2.修改为相对路径"></a>2.修改为相对路径</h3><p>修改相对路径，又有两种方式：</p>
+<h4 id="（1）"><a href="#（1）" class="headerlink" title="（1）"></a>（1）</h4><p>在Vue项目config -&gt; index.js配置文件中。将assetsPublicPath修改为’./‘，即相对于index.html的同级路径。</p>
+<h4 id="（2）"><a href="#（2）" class="headerlink" title="（2）"></a>（2）</h4><p>在Vue项目build -&gt; webpack.prod.conf.js配置文件中，找到output，新增publicPath:’./‘即可。</p>
+<h4 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h4><p>通过以上的设置，虽然已经大部分资源引用的路径已经修改为相对路径，但实际上css引用的资源路径还存在问题。因为在webpack中css文件是使用extract-text-webpack-plugin单独进行打包处理。所以需要在build -&gt; utils.js配置文件中，找到ExtractTextPlugin.extract，在参数中新增publicPath:’../../‘。</p>
+<p>综合以上两种方式，第一种修改绝对路径的方式，不便于服务迁移，因为每次改变项目部署路径，都需要修改源码中的资源打包路径。而第二种相对路径方式，资源访问的起点都是当前路径，不存在对源码的修改，推荐使用。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+<script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mrliduanyang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

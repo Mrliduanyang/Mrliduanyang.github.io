@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;example.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Muse&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<meta name="description" content="相信很多读者在学习排序算法的时候，理解并背下了快速排序和归并排序的代码。而对于堆排序可能了解不多，对堆的印象可能只停留在大顶堆堆顶元素最大，小顶堆堆顶元素最小。但其实，堆排序才是个人认为的原理最简单、代码最简洁的一种优秀排序算法。 0. 完全二叉堆在深入了解堆之前，可以先想这么一个问题，堆长什么样？有的读者会觉得，（大顶）堆堆顶元素最大，然后它的左右孩子比它小，所以应该是树怎么存，它就怎么存吧。用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="堆和堆排序">
+<meta property="og:url" content="http://example.com/2021/03/20/%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:site_name" content="N.O的个人技术备忘">
+<meta property="og:description" content="相信很多读者在学习排序算法的时候，理解并背下了快速排序和归并排序的代码。而对于堆排序可能了解不多，对堆的印象可能只停留在大顶堆堆顶元素最大，小顶堆堆顶元素最小。但其实，堆排序才是个人认为的原理最简单、代码最简洁的一种优秀排序算法。 0. 完全二叉堆在深入了解堆之前，可以先想这么一个问题，堆长什么样？有的读者会觉得，（大顶）堆堆顶元素最大，然后它的左右孩子比它小，所以应该是树怎么存，它就怎么存吧。用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210320134454.png">
+<meta property="og:image" content="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210320143050.png">
+<meta property="og:image" content="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210320144445.png">
+<meta property="og:image" content="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210320145230.png">
+<meta property="og:image" content="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210320151222.png">
+<meta property="article:published_time" content="2021-03-20T12:22:16.000Z">
+<meta property="article:modified_time" content="2021-05-11T05:09:11.816Z">
+<meta property="article:author" content="Mrliduanyang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210320134454.png">
+
+
+<link rel="canonical" href="http://example.com/2021/03/20/%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;03&#x2F;20&#x2F;%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;03&#x2F;20&#x2F;堆和堆排序&#x2F;&quot;,&quot;title&quot;:&quot;堆和堆排序&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>堆和堆排序 | N.O的个人技术备忘</title><script src="/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">N.O的个人技术备忘</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E5%A0%86"><span class="nav-number">1.</span> <span class="nav-text">0. 完全二叉堆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E5%A0%86%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">1. 完全二叉堆的表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E5%A0%86%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">2. 完全二叉堆的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E4%B8%8A%E6%BB%A4"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 上滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E4%B8%8B%E6%BB%A4"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 下滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%BB%BA%E5%A0%86"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 建堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E6%93%8D%E4%BD%9C%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 操作复杂度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%A0%86%E6%8E%92%E5%BA%8F"><span class="nav-number">4.</span> <span class="nav-text">3. 堆排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%A0%86%E3%80%81%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%81%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E5%A0%86%E3%80%81%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">5.</span> <span class="nav-text">4. 堆、完全二叉树、完全二叉堆、优先级队列的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">5. 总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mrliduanyang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/20/%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mrliduanyang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="N.O的个人技术备忘">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          堆和堆排序
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-20 20:22:16" itemprop="dateCreated datePublished" datetime="2021-03-20T20:22:16+08:00">2021-03-20</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-05-11 13:09:11" itemprop="dateModified" datetime="2021-05-11T13:09:11+08:00">2021-05-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>相信很多读者在学习排序算法的时候，理解并背下了快速排序和归并排序的代码。而对于堆排序可能了解不多，对堆的印象可能只停留在大顶堆堆顶元素最大，小顶堆堆顶元素最小。但其实，堆排序才是个人认为的原理最简单、代码最简洁的一种优秀排序算法。</p>
+<h2 id="0-完全二叉堆"><a href="#0-完全二叉堆" class="headerlink" title="0. 完全二叉堆"></a>0. 完全二叉堆</h2><p>在深入了解堆之前，可以先想这么一个问题，堆长什么样？有的读者会觉得，（大顶）堆堆顶元素最大，然后它的左右孩子比它小，所以应该是树怎么存，它就怎么存吧。用一个个的节点存值，然后节点的左右孩子指针指向它的左右孩子。这确实没错，但要注意到完全二叉堆在逻辑结构上等同于一棵完全二叉树，跟线性的数组有着紧密的对应关系。所以我们可以用数组来存储这个完全二叉堆，这么做的优势也很明显，各节点在物理上连续排列，还可以轻松的按照索引来访问节点。</p>
+<h2 id="1-完全二叉堆的表示"><a href="#1-完全二叉堆的表示" class="headerlink" title="1. 完全二叉堆的表示"></a>1. 完全二叉堆的表示</h2><p>铺垫了这么多，我们来看一个堆的实例，理解完全二叉堆的表示和存储。</p>
+<p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210320134454.png" alt="image-20210320134454529"></p>
+<p>如图，右边是我们想象中的一个小顶堆的样子，左上角的完全二叉树是这个小顶堆对应的二叉树表示，左下角连续排列的元素是该完全二叉树按层次遍历得到的结果，元素的不同层级代表了元素在完全二叉树中所处的不同深度。这一实现方式的优势首先体现在，各节点在物理上连续排列，故总共仅需$O(n)$空间。而更重要地是，利用各节点在数组中的索引，也可便捷地判别父子关系。比如，节点<strong>2</strong>在数组中的索引是2，而它的左右孩子<strong>5</strong>和<strong>6</strong>的索引分别是5和6，恰好满足$5=2 \times 2+1,6=2 \times 2+2$。更一般的，对于索引为$i$的节点，它的左右孩子和父节点的索引必然满足：<br>$$<br>左孩子索引=2 \times i + 1, 右孩子索引=2 \times i + 2, 父节点索引=\lceil i / 2 \rceil + 1<br>$$</p>
+<h2 id="2-完全二叉堆的操作"><a href="#2-完全二叉堆的操作" class="headerlink" title="2. 完全二叉堆的操作"></a>2. 完全二叉堆的操作</h2><p>当在完全二叉堆中插入或者删除元素后，完全二叉堆的“堆序性”可能不在满足，所谓的“堆序性”是指堆顶以外的每个节点都不小（大）于其父节点。而为了让完全二叉堆重新满足“堆序性”，需要对其进行上滤和下滤操作。</p>
+<h3 id="2-1-上滤"><a href="#2-1-上滤" class="headerlink" title="2.1 上滤"></a>2.1 上滤</h3><p>上滤发生在向堆中插入新元素的时候，首先要把待插入元素置于数组末尾，然后不断调整其和父节点的偏序关系，这一过程体现在树中就仿佛叶子节点在不断向上浮，因此叫上滤。</p>
+<p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210320143050.png" alt="image-20210320143050475"></p>
+<p>在如图(a)所示由5个元素组成的初始堆中，现拟插入值为5的新元素。为此：</p>
+<ul>
+<li>首先如图(b)所示，将该元素置于数组的末尾；</li>
+<li>新元素5与其父节点0逆序，故如图(c)所示，经一次交换之后，新元素5上升一层；</li>
+<li>新元素5与其新的父节点4依然逆序，故如图(d)所示，经一次交换后再上升一层；</li>
+<li>此时因5已抵达堆顶，插入操作完毕，故算法终止。</li>
+</ul>
+<h3 id="2-2-下滤"><a href="#2-2-下滤" class="headerlink" title="2.2 下滤"></a>2.2 下滤</h3><p>下滤发生在从堆中删除最值元素的时候，首先从数组头部将最值元素摘除，接着为调整偏序关系，需要把数组末尾元素交换到头部，然后不断调整头部元素和其孩子节点的偏序关系，这一过程体现在树中就仿佛根节点在不断向下沉，因此叫下滤。</p>
+<p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210320144445.png" alt="image-20210320144445675"></p>
+<p>从如图(a)所示由6个元素组成的完全堆中，现拟删除堆顶元素5。为此：</p>
+<ul>
+<li>首先如图(b)所示 将该元素摘除，并将向量的末元素1转入首单元，当作堆顶；</li>
+<li>1与其孩子节点均逆序。故如图(c)所示，在与其孩子中的大者4交换之后，1下降一层；</li>
+<li>1与其新的孩子2依然逆序，故如图(d)所示经又一次交换后再下降一层；</li>
+<li>此时因1已抵达底层，删除操作完毕，算法成功终止。</li>
+</ul>
+<h3 id="2-3-建堆"><a href="#2-3-建堆" class="headerlink" title="2.3 建堆"></a>2.3 建堆</h3><p>建堆的方式有好多种，我们只讲复杂度最低的一种：<strong>Floyd建堆</strong>。</p>
+<p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210320145230.png" alt="image-20210320145230665"></p>
+<p>首先如图(a)所示，将9个元素组织为一棵完全二叉树。 要注意到，在多数情况下，输入数据都是以数组形式给出，故除了明确各元素间的父子关系外，并不需要做任何实质的操作。此时，所有叶节点各自即是一个规模为1的堆。之后，自底而上地逐层合并：</p>
+<ul>
+<li>首先如图(b)所示，在对3实施下滤调整之后，{ 8 }和{ 5 }合并为{ 8, 3, 5 }；</li>
+<li>接下来如图(c)所示，在对1实施下滤调整之后，{ 8, 3, 5 }与{ 9 }合并为{ 9, 8, 1, 3, 5 }； </li>
+<li>对6实施下滤调整之后，{ 7 }与{ 4 }合并为{ 7, 6, 4 }；</li>
+<li>最后如图(d)所示，在对2实施下滤调整之后，{ 9, 8, 1, 3, 5 }与{ 7, 6, 4 }合并为{ 9, 8, 7, 5, 1, 6, 4, 3, 2 }，建堆完毕。</li>
+</ul>
+<h3 id="2-4-操作复杂度"><a href="#2-4-操作复杂度" class="headerlink" title="2.4 操作复杂度"></a>2.4 操作复杂度</h3><p>上滤和下滤：最多进行树高次，而每次调整的仅涉及两个元素的交换，时间复杂度为$O(1)$，因此，上滤和下滤的时间复杂度为$O(\log_2n )$。</p>
+<p>Floyd建堆：时间复杂为$O(n)$，建堆算法需做n步迭代，以对所有节点各做一次下滤。这里，每个节点的下滤所需的时间线性正比于其高度，故总体运行时间取决于各节点的高度总和。</p>
+<h2 id="3-堆排序"><a href="#3-堆排序" class="headerlink" title="3. 堆排序"></a>3. 堆排序</h2><p>有了上滤、下滤、建堆的基础，我们就可以实现堆排序了，这里介绍原地堆排序算法。</p>
+<p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210320151222.png" alt="image-20210320151222832"></p>
+<p>图中Heap为大顶堆部分，Sorted为有序区部分。Heap和Sorted都在一个数组中存储，只是通过不同的索引来控制两部分的范围。最开始Heap占据整个数组，Sorted为空，随着我们不断将Heap中堆顶的最大元素交换到Sorted部分，Heap规模逐渐减小，Sorted规模逐渐扩大，又因为每次从Heap交换到Sorted中的最大值都在上一个最大值的左边，所以Sorted保持升序。</p>
+<p>更具体的，首先如图(a)，取出首元素M，将其与末元素X交换，如此交换之后M必处于正确的排序位置。故如图(b)，此时可等效地认为Sorted向前扩大了一个单元，Heap相应地缩小了一个单元。 但存在的问题是，元素X在Heap中的位置不一定准确，但只需对X实施一次下滤调整，即可使Heap整体的堆序性重新恢复，结果如图(c)所示。重复上述操作，当Sorted规模扩大到整个数组，即完成了原地堆排序。</p>
+<h2 id="4-堆、完全二叉树、完全二叉堆、优先级队列的关系"><a href="#4-堆、完全二叉树、完全二叉堆、优先级队列的关系" class="headerlink" title="4. 堆、完全二叉树、完全二叉堆、优先级队列的关系"></a>4. 堆、完全二叉树、完全二叉堆、优先级队列的关系</h2><p>在练习算法题时用过堆排序的读者可能会留意，在C++和Java语言中，“堆”是用优先级队列实现的。那堆、完全二叉堆、完全二叉树和优先级队列之间究竟是什么关系？</p>
+<p><strong>堆（Heap）</strong>是计算机科学中的一种特别的<strong>完全二叉树</strong>。若是满足以下特性，即可称为堆：“给定堆中任意节点P和C，若P是C的母节点，那么P的值会小于等于（或大于等于）C的值”。</p>
+<p><strong>堆</strong>的实现通常是通过构造<strong>完全二叉堆（Complete Binary Heap）</strong>，因为完全二叉堆应用很普遍，当不加限定时，堆通常指的就是完全二叉堆。</p>
+<p>简单来说，堆其实就是指完全二叉堆。因为他们的堆序性和完全二叉性一样。</p>
+<p>但其实，当我们提到堆时，往往关心的不是堆这种数据结构，而是它里面的偏序思想，也就是只从中获取最大值（最小值）、高优先级（低优先级）元素，并不关心其他元素。事实上，在C++的STL里，堆并不是一种容器，而是一种算法，只提供了关于堆调整的算法。</p>
+<p>刚说了，能从堆里获取优先级最高（最低）的元素，所以把这种算法加上能够提供随机访问迭代器的容器（如：Vector），就得到了<strong>优先级队列</strong>。</p>
+<p>所以，我们才能在代码中使用优先级队列来模拟“堆”。</p>
+<h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h2><p>以上就是关于堆和堆排序的讲解，更具体的算法实现代码在后续文章中分享。文中所有图片和部分文字来源于清华大学出版的《数据结构（C++语言版）》，教材链接在文章最后。</p>
+<p><a target="_blank" rel="noopener" href="https://dsa.cs.tsinghua.edu.cn/~deng/ds/dsacpp/">https://dsa.cs.tsinghua.edu.cn/~deng/ds/dsacpp/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/13/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86%E7%9A%84%E7%BB%9F%E4%B8%80%E5%86%99%E6%B3%95/" rel="prev" title="二叉树遍历的统一化写法">
+                  <i class="fa fa-chevron-left"></i> 二叉树遍历的统一化写法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/03/25/%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%A0%91/" rel="next" title="LeetCode分享（序列化和反序列化树）">
+                  LeetCode分享（序列化和反序列化树） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mrliduanyang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

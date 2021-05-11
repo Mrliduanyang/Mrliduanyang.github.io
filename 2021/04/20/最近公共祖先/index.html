@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;example.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Muse&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<meta name="description" content="本次带大家盘点LeetCode上的“最近公共祖先”相关的问题，一共有5道，分别是  LeetCode 235. 二叉搜索树的最近公共祖先； LeetCode 236. 二叉树的最近公共祖先； LeetCode 1644. 二叉树的最近公共祖先 II； LeetCode 1650. 二叉树的最近公共祖先 III； LeetCode 1676. 二叉树的最近公共祖先 IV。  我们不按照题号顺序来讲解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode分享（最近公共祖先））">
+<meta property="og:url" content="http://example.com/2021/04/20/%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/index.html">
+<meta property="og:site_name" content="N.O的个人技术备忘">
+<meta property="og:description" content="本次带大家盘点LeetCode上的“最近公共祖先”相关的问题，一共有5道，分别是  LeetCode 235. 二叉搜索树的最近公共祖先； LeetCode 236. 二叉树的最近公共祖先； LeetCode 1644. 二叉树的最近公共祖先 II； LeetCode 1650. 二叉树的最近公共祖先 III； LeetCode 1676. 二叉树的最近公共祖先 IV。  我们不按照题号顺序来讲解">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210411160028.png">
+<meta property="og:image" content="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210411183622.png">
+<meta property="og:image" content="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210411184006.png">
+<meta property="og:image" content="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210411183713.png">
+<meta property="og:image" content="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210411183921.png">
+<meta property="article:published_time" content="2021-04-19T17:37:50.000Z">
+<meta property="article:modified_time" content="2021-05-11T05:09:11.816Z">
+<meta property="article:author" content="Mrliduanyang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210411160028.png">
+
+
+<link rel="canonical" href="http://example.com/2021/04/20/%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;04&#x2F;20&#x2F;%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;04&#x2F;20&#x2F;最近公共祖先&#x2F;&quot;,&quot;title&quot;:&quot;LeetCode分享（最近公共祖先））&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>LeetCode分享（最近公共祖先）） | N.O的个人技术备忘</title><script src="/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">N.O的个人技术备忘</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-LeetCode-235"><span class="nav-number">1.</span> <span class="nav-text">0. LeetCode 235</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF%E4%B8%8E%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">思路与算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeetCode-236"><span class="nav-number">2.</span> <span class="nav-text">LeetCode 236</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF%E4%B8%8E%E7%AE%97%E6%B3%95-1"><span class="nav-number">2.1.</span> <span class="nav-text">思路与算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeetCode-1676"><span class="nav-number">3.</span> <span class="nav-text">LeetCode 1676</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF%E4%B8%8E%E7%AE%97%E6%B3%95-2"><span class="nav-number">3.1.</span> <span class="nav-text">思路与算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeetCode-1644"><span class="nav-number">4.</span> <span class="nav-text">LeetCode 1644</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E4%B8%8E%E6%80%9D%E8%B7%AF"><span class="nav-number">4.1.</span> <span class="nav-text">算法与思路</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeetCode-1650"><span class="nav-number">5.</span> <span class="nav-text">LeetCode 1650</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E4%B8%8E%E6%80%9D%E8%B7%AF-1"><span class="nav-number">5.1.</span> <span class="nav-text">算法与思路</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mrliduanyang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/20/%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mrliduanyang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="N.O的个人技术备忘">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LeetCode分享（最近公共祖先））
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-04-20 01:37:50" itemprop="dateCreated datePublished" datetime="2021-04-20T01:37:50+08:00">2021-04-20</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-05-11 13:09:11" itemprop="dateModified" datetime="2021-05-11T13:09:11+08:00">2021-05-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本次带大家盘点LeetCode上的“最近公共祖先”相关的问题，一共有5道，分别是</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/">LeetCode 235. 二叉搜索树的最近公共祖先</a>；</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/">LeetCode 236. 二叉树的最近公共祖先</a>；</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree-ii/">LeetCode 1644. 二叉树的最近公共祖先 II</a>；</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree-iii/">LeetCode 1650. 二叉树的最近公共祖先 III</a>；</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree-iv/">LeetCode 1676. 二叉树的最近公共祖先 IV</a>。</li>
+</ul>
+<p>我们不按照题号顺序来讲解，而是按照相近性来组织。</p>
+<h2 id="0-LeetCode-235"><a href="#0-LeetCode-235" class="headerlink" title="0. LeetCode 235"></a>0. LeetCode 235</h2><blockquote>
+<p>给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大<strong>（一个节点也可以是它自己的祖先）</strong>。”</p>
+<p>例如，给定如下二叉搜索树:  root = [6,2,8,0,4,7,9,null,null,3,5]</p>
+<p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210411160028.png" alt="img"></p>
+<p><strong>示例 1：</strong></p>
+<p><strong>输入：</strong> root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8<br><strong>输出：</strong> 6<br><strong>解释：</strong> 节点 2 和节点 8 的最近公共祖先是 6。</p>
+<p><strong>示例 2：</strong></p>
+<p><strong>输入：</strong> root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4<br><strong>输出：</strong> 2<br><strong>解释：</strong> 节点 2 和节点 4 的最近公共祖先是 2, 因为根据定义最近公共祖先节点可以为节点本身。</p>
+<p><strong>说明：</strong></p>
+<ul>
+<li>所有节点的值都是唯一的。</li>
+<li>p、q 为不同节点且均存在于给定的二叉搜索树中。</li>
+</ul>
+</blockquote>
+<h3 id="思路与算法"><a href="#思路与算法" class="headerlink" title="思路与算法"></a>思路与算法</h3><p>这题给定的是一个二叉搜索树，其他几个题都是二叉树，所以我们可以利用二叉搜索树的性质来确定搜索方向。同时还要留意，p、q节点一定存在于给定的二叉搜索树中，这就简化了我们的判断，因为不需要考虑查询节点不在树中的情况，闭着眼往深了搜就行。</p>
+<ul>
+<li>从根节点开始遍历；</li>
+<li>如果当前节点的值大于p和q的值，说明p和q应该在当前节点的左子树，因此递归进入左孩子节点；</li>
+<li>如果当前节点的值小于p和q的值，说明p和q应该在当前节点的右子树，因此递归进入右孩子节点；</li>
+<li>如果当前节点的值不满足上述两条要求，那么又会有两种情况，这两种情况都可以直接返回当前节点：<ul>
+<li>p和q分别在当前节点的不同子树中；</li>
+<li>当前节点就是p或q。</li>
+</ul>
+</li>
+</ul>
+<p>上述思路很容易用递归形式实现，所以我们定义递归函数的功能是：<strong>返回p、q节点的最近公共祖先</strong>。算法代码如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">LowestCommonAncestor</span>(<span class="params">TreeNode root, TreeNode p, TreeNode q</span>)</span> &#123;</span><br><span class="line">    <span class="function">TreeNode <span class="title">Helper</span>(<span class="params">TreeNode node, TreeNode p, TreeNode q</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (p.val &lt; node.val &amp;&amp; q.val &lt; node.val)</span><br><span class="line">            <span class="keyword">return</span> Helper(node.left, p, q);</span><br><span class="line">        <span class="keyword">if</span> (p.val &gt; node.val &amp;&amp; q.val &gt; node.val)</span><br><span class="line">            <span class="keyword">return</span> Helper(node.right, p, q);</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Helper(root, p, q);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对照算法，参考上图的二叉搜索树，我们来模拟几个查询：</p>
+<ol>
+<li>p=2，q=8：从node=6开始，发现p和q分别在node两侧，返回node=6即可。</li>
+<li>p=0，q=4：从node=6开始，发现p和q都比node小，于是递归进入node的左子树；node=2，发现p和q分别在node两侧，逐级返回node=2即可。</li>
+<li>p=4，q=3：从node=6开始，发现p和q都比node小，于是递归进入node的左子树；node=2，发现p和q都比node大，于是递归进入node的右子树；node=4，发现node=p，逐级返回node=4即可。</li>
+</ol>
+<p>我们还要留意一点，最近公共祖先需要满足深度尽可能大，那我们的算法满足这点吗？肯定是满足的，因为整个算法第一次找到正确答案的位置就是一个尽可能深的位置（再往深处是不可能存在答案的），算法在返回答案的时候，也是按照递归调用顺序逐级返回该答案，因而可以保证最近公共祖先的正确性。</p>
+<h2 id="LeetCode-236"><a href="#LeetCode-236" class="headerlink" title="LeetCode 236"></a>LeetCode 236</h2><blockquote>
+<p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个节点 p、q，最近公共祖先表示为一个节点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
+<p> <strong>示例 1：</strong></p>
+<p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210411183622.png" alt="img"></p>
+<p><strong>输入：</strong> root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1<br><strong>输出：</strong> 3<br><strong>解释：</strong> 节点 5 和节点 1 的最近公共祖先是节点 3 。</p>
+<p><strong>示例 2：</strong></p>
+<p><strong>输入：</strong> root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4<br><strong>输出：</strong> 5<br><strong>解释：</strong> 节点 5 和节点 4 的最近公共祖先是节点 5 。因为根据定义最近公共祖先节点可以为节点本身。</p>
+<p><strong>示例 3：</strong></p>
+<p><strong>输入：</strong> root = [1,2], p = 1, q = 2<br><strong>输出：</strong> 1</p>
+<p><strong>提示：</strong></p>
+<ul>
+<li>树中节点数目在范围 [2, 105] 内。</li>
+<li>-109 &lt;= Node.val &lt;= 109</li>
+<li>所有 Node.val 互不相同 。</li>
+<li>p != q</li>
+<li>p 和 q 均存在于给定的二叉树中。</li>
+</ul>
+</blockquote>
+<h3 id="思路与算法-1"><a href="#思路与算法-1" class="headerlink" title="思路与算法"></a>思路与算法</h3><p>有了上一题的基础，再看这一题就简单了很多。</p>
+<p>首先还是要读题，和上一题不同的是，这一题给的树是二叉树，不满足二叉搜索的性质，但相同的是，p和q都在树中。</p>
+<p>不满足二叉搜索性质，还能用上一题的思路吗？能的。回顾上一题，我们利用二叉搜索的性质做了什么？我们只是根据待查询节点和根节点的大小关系，确定搜索方向而已。那假如不能确定向左子树搜索还是向右子树搜索怎么办呢？也很简单，不确定向哪边搜索，那就都搜索，肯定能保证不会漏掉节点。</p>
+<p>按照上一题的大体思路，将单侧递归改为两侧递归，算法代码如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">LowestCommonAncestor</span>(<span class="params">TreeNode root, TreeNode p, TreeNode q</span>)</span> &#123;</span><br><span class="line">    <span class="function">TreeNode <span class="title">Helper</span>(<span class="params">TreeNode node, TreeNode p, TreeNode q</span>)</span> &#123;</span><br><span class="line">        <span class="comment">// 递归结束条件，如果在不存在p、q的分支搜索，只能递归到底然后返回null；如果在存在p、q的分支搜索，搜索到p或q返回即可</span></span><br><span class="line">        <span class="keyword">if</span> (node == <span class="literal">null</span> || node == p || node == q) <span class="keyword">return</span> node;</span><br><span class="line">        <span class="comment">// 向左侧递归搜索</span></span><br><span class="line">        <span class="keyword">var</span> left = Helper(node.left, p, q);</span><br><span class="line">        <span class="comment">// 向右侧递归搜索</span></span><br><span class="line">        <span class="keyword">var</span> right = Helper(node.right, p, q);</span><br><span class="line">        <span class="comment">// 处理搜索结果，如果分别在左右两侧找到p或q，返回node即可</span></span><br><span class="line">        <span class="comment">// 分析上述结论，首先从题中可知p、q在树中唯一且不等，p、q相对于node的位置只有四种</span></span><br><span class="line">        <span class="comment">// （1）p、q都在node左侧</span></span><br><span class="line">        <span class="comment">// （2）p、q都在node右侧</span></span><br><span class="line">        <span class="comment">// （3）p都在node左侧，q在node右侧</span></span><br><span class="line">        <span class="comment">// （4）q都在node左侧，p在node右侧</span></span><br><span class="line">        <span class="comment">// 我们不可能画出一棵有两个节点左右两侧都有p和q的树，所以可以确定当p、q分居node两侧时，node即为最近公共祖先</span></span><br><span class="line">        <span class="keyword">if</span> (left != <span class="literal">null</span> &amp;&amp; right != <span class="literal">null</span>) <span class="keyword">return</span> node;</span><br><span class="line">        <span class="comment">// 当p、q只在node一侧出现，另一侧的返回结果肯定为null，返回非null的结果即可</span></span><br><span class="line">        <span class="keyword">return</span> left == <span class="literal">null</span> ? right : left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Helper(root, p, q);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="LeetCode-1676"><a href="#LeetCode-1676" class="headerlink" title="LeetCode 1676"></a>LeetCode 1676</h2><blockquote>
+<p>给定一棵二叉树的根节点 root 和 TreeNode 类对象的数组（列表） nodes，返回 nodes 中所有节点的最近公共祖先（LCA）。数组（列表）中所有节点都存在于该二叉树中，且二叉树中所有节点的值都是互不相同的。</p>
+<p>我们扩展二叉树的最近公共祖先节点在维基百科上的定义：“对于任意合理的 i 值， n 个节点 p1 、 p2、…、 pn 在二叉树 T 中的最近公共祖先节点是后代中包含所有节点 pi 的最深节点（我们允许一个节点是其自身的后代）”。一个节点 x 的后代节点是节点 x 到某一叶节点间的路径中的节点 y。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210411184006.png" alt="img"></p>
+<p><strong>输入：</strong> root = [3,5,1,6,2,0,8,null,null,7,4], nodes = [4,7]<br><strong>输出：</strong> 2<br><strong>解释：</strong> 节点 4 和 7 的最近公共祖先是 2。</p>
+<p><strong>示例 2：</strong></p>
+<p><strong>输入：</strong> root = [3,5,1,6,2,0,8,null,null,7,4], nodes = [1]<br><strong>输出：</strong> 1<br><strong>解释：</strong> 单个节点的最近公共祖先是该节点本身。</p>
+<p><strong>示例 3：</strong> </p>
+<p><strong>输入：</strong> root = [3,5,1,6,2,0,8,null,null,7,4], nodes = [7,6,2,4]<br><strong>输出：</strong> 5<br><strong>解释：</strong> 节点 7、6、2 和 4 的最近公共祖先节点是 5。</p>
+<p><strong>示例 4：</strong></p>
+<p><strong>输入：</strong> root = [3,5,1,6,2,0,8,null,null,7,4], nodes = [0,1,2,3,4,5,6,7,8]<br><strong>输出：</strong> 3<br><strong>解释：</strong> 树中所有节点的最近公共祖先是根节点。</p>
+<p><strong>提示：</strong></p>
+<ul>
+<li>树中节点个数的范围是 [1, 104] 。</li>
+<li>-109 &lt;= Node.val &lt;= 109</li>
+<li>所有的 Node.val 都是互不相同的。</li>
+<li>所有的 nodes[i] 都存在于该树中。</li>
+<li>所有的 nodes[i] 都是互不相同的。</li>
+</ul>
+</blockquote>
+<h3 id="思路与算法-2"><a href="#思路与算法-2" class="headerlink" title="思路与算法"></a>思路与算法</h3><p>这道题相对于上题而言，只是把p、q两节点的条件改为了节点列表nodes，但本质上来讲，两道题没有区别。我们来想一下上一题的递归结束条件<strong>如果在不存在p、q的分支搜索，只能递归到底然后返回null；如果在存在p、q的分支搜索，搜索到p或q返回即可</strong>，那在这题里面，我们搜索到nodes中任意一个返回就可以了。</p>
+<p>为什么可以这么想呢？我们站在p、q关系的角度来看上一题。在符合题目要求的二叉树中，p、q的相对位置关系只有两种（1）”祖先-孙子”关系，如：<strong>p=3、q=5，p=5、q=2，p=5、q=7</strong>；（2）非”祖先-孙子”关系，如：<strong>p=5、q=1，p=5、q=0，p=7、q=1</strong>。这两种关系也恰好对应了算法中对<strong>left</strong>和<strong>right</strong>结果的处理。把这种关系推广到本题，多个节点之间也是满足这种关系的。如果多个节点分成两组后分在节点node的两侧，则node就是所有节点的最近公共祖先；如果多个节点都在节点node的一侧，则多个节点中距离node最近的那个就是他们的最近公共祖先。改写上题的算法代码如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">LowestCommonAncestor</span>(<span class="params">TreeNode root, TreeNode[] nodes</span>)</span> &#123;</span><br><span class="line">    <span class="function">TreeNode <span class="title">Helper</span>(<span class="params">TreeNode node</span>)</span> &#123;</span><br><span class="line">        <span class="comment">// 重点，递归结束条件改为判断nodes中是否包含node</span></span><br><span class="line">        <span class="keyword">if</span> (node == <span class="literal">null</span> || nodes.Contains(node)) <span class="keyword">return</span> node;</span><br><span class="line">        <span class="keyword">var</span> l = Helper(node.left);</span><br><span class="line">        <span class="keyword">var</span> r = Helper(node.right);</span><br><span class="line">        <span class="keyword">if</span> (l != <span class="literal">null</span> &amp;&amp; r != <span class="literal">null</span>) <span class="keyword">return</span> node;</span><br><span class="line">        <span class="keyword">return</span> l == <span class="literal">null</span> ? r : l;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Helper(root);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="LeetCode-1644"><a href="#LeetCode-1644" class="headerlink" title="LeetCode 1644"></a>LeetCode 1644</h2><blockquote>
+<p>给定一棵二叉树的根节点 root，返回给定节点 p 和 q 的最近公共祖先（LCA）节点。<strong>如果 p 或 q 之一不存在于该二叉树中，返回 null。</strong>树中的每个节点值都是互不相同的。</p>
+<p>根据维基百科中对最近公共祖先节点的定义：“两个节点 p 和 q 在二叉树 T 中的最近公共祖先节点是后代节点中既包括 p 又包括 q 的最深节点（我们允许一个节点为自身的一个后代节点）”。一个节点 x 的后代节点是节点 x 到某一叶节点间的路径中的节点 y。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210411183713.png" alt="img"></p>
+<p><strong>输入：</strong> root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1<br><strong>输出：</strong> 3<br><strong>解释：</strong> 节点 5 和 1 的共同祖先节点是 3。</p>
+<p><strong>示例 2：</strong></p>
+<p><strong>输入：</strong> root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4<br><strong>输出：</strong> 5<br><strong>解释：</strong> 节点 5 和 4 的共同祖先节点是 5。根据共同祖先节点的定义，一个节点可以是自身的后代节点。</p>
+<p><strong>示例 3：</strong></p>
+<p><strong>输入：</strong> root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 10<br><strong>输出：</strong> null<br><strong>解释：</strong> 节点 10 不存在于树中，所以返回 null。</p>
+<p><strong>提示：</strong></p>
+<ul>
+<li>树中节点个数的范围是 [1, 104]。</li>
+<li>-109 &lt;= Node.val &lt;= 109</li>
+<li>所有节点的值 Node.val 是互不相同的。</li>
+<li>p != q</li>
+</ul>
+</blockquote>
+<h3 id="算法与思路"><a href="#算法与思路" class="headerlink" title="算法与思路"></a>算法与思路</h3><p>粗略一看，感觉和上一题没什么区别。但要留意一点，<strong>本题中的p、q节点不一定存在于给定的二叉树中</strong>。这就导致我们上面题目中的思路都不能用。为什么呢？因为在上面三道题目中，都明确指明p、q节点都在二叉树中，所以我们的递归函数可以定义为：<strong>返回p、q节点的最近公共祖先</strong>。这样定义的话，如果递归返回的是null，则能确定p或q不在当前子树。但如果把该递归函数应用到本题，如果递归返回null，我们无法确定是因为p或q不在子树中返回的null还是p或q根本就不在给定树中导致的搜索失败返回null。</p>
+<p>我们需要调整思路，将递归函数调整为：<strong>判断p、q节点是否在当前子树中</strong>。这样做相对于直接返回最近公共祖先的好处在于，如果p或q不在当前子树中，那我们还可以再额外判断p或q是否等于当前根节点。这样等到递归结束时，我们是可以判定p或q是否真的存在于二叉树中。</p>
+<p>按上述思路，改写算法代码如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">LowestCommonAncestor</span>(<span class="params">TreeNode root, TreeNode p, TreeNode q</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 因为递归函数不再直接返回最近公共祖先的结果，需要使用一个全局变量来保存最近公共祖先</span></span><br><span class="line">    TreeNode ans = <span class="literal">null</span>;</span><br><span class="line">    <span class="comment">// 递归函数定义：判断p或q节点是否在当前树中</span></span><br><span class="line">    <span class="function"><span class="built_in">bool</span> <span class="title">Helper</span>(<span class="params">TreeNode node, TreeNode p, TreeNode q</span>)</span> &#123;</span><br><span class="line">        <span class="comment">// 递归结束条件，搜索到null时，只能返回false</span></span><br><span class="line">        <span class="keyword">if</span> (node == <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">var</span> left = Helper(node.left, p, q);</span><br><span class="line">        <span class="keyword">var</span> right = Helper(node.right, p, q);</span><br><span class="line">        <span class="comment">// 更新结果，只在两种情况下才会更新：</span></span><br><span class="line">        <span class="comment">// （1）left和right都为true，说明p、q都存在且分在node两侧，ans更新为node</span></span><br><span class="line">        <span class="comment">// （2）p或q等于node并且node的左子树或右子树中存在p或q</span></span><br><span class="line">        <span class="keyword">if</span> ((left &amp;&amp; right) || ((node.val == p.val || node.val == q.val) &amp;&amp; (left || right))) &#123;</span><br><span class="line">            ans = node;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 递归函数返回值，如果当前节点左子树或者右子树中存在p或q，或者当前节点就是p或q，都可以返回true</span></span><br><span class="line">        <span class="keyword">return</span> left || right || (node.val == p.val || node.val == q.val);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Helper(root, p, q);</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="LeetCode-1650"><a href="#LeetCode-1650" class="headerlink" title="LeetCode 1650"></a>LeetCode 1650</h2><blockquote>
+<p>给定一棵二叉树中的两个节点 p 和 q，返回它们的最近公共祖先节点（LCA）。</p>
+<p>每个节点都包含其父节点的引用（指针）。Node 的定义如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Node</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> val;</span><br><span class="line">    <span class="keyword">public</span> Node left;</span><br><span class="line">    <span class="keyword">public</span> Node right;</span><br><span class="line">    <span class="keyword">public</span> Node parent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>根据维基百科中对最近公共祖先节点的定义：“两个节点 p 和 q 在二叉树 T 中的最近公共祖先节点是后代节点中既包括 p 又包括 q 的最深节点（我们允许一个节点为自身的一个后代节点）”。一个节点 x 的后代节点是节点 x 到某一叶节点间的路径中的节点 y。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210411183921.png" alt="img"></p>
+<p><strong>输入：</strong> root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1<br><strong>输出：</strong> 3<br><strong>解释：</strong> 节点 5 和 1 的最近公共祖先是 3。</p>
+<p><strong>示例 2：</strong></p>
+<p><strong>输入：</strong> root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4<br><strong>输出：</strong> 5<br><strong>解释：</strong> 节点 5 和 4 的最近公共祖先是 5，根据定义，一个节点可以是自身的最近公共祖先。</p>
+<p><strong>示例 3：</strong></p>
+<p><strong>输入：</strong> root = [1,2], p = 1, q = 2<br><strong>输出：</strong> 1</p>
+<p><strong>提示：</strong></p>
+<ul>
+<li>树中节点个数的范围是 [2, 105]。</li>
+<li>-109 &lt;= Node.val &lt;= 109</li>
+<li>所有的 Node.val 都是互不相同的。</li>
+<li>p != q</li>
+<li>p 和 q 存在于树中。</li>
+</ul>
+</blockquote>
+<h3 id="算法与思路-1"><a href="#算法与思路-1" class="headerlink" title="算法与思路"></a>算法与思路</h3><p>这道题和上面四题又都不一样。这题其实是<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/">LeetCode 160. 相交链表</a>的变形，思路也是使用相交链表的思路。为什么说是相交链表的变形呢？因为当我们从p、q节点出发向父节点走，一直走到根节点，忽略掉其他所有没有访问到的节点，我们就得到了两个不同的链表，然后这两个链表在p、q最近公共祖先的位置相交了。</p>
+<p>算法思想很简单，跟着走两遍就能体会原理了。更详细的算法讲解可以参考<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/">LeetCode 160. 相交链表</a>的相关题解。代码如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Node <span class="title">LowestCommonAncestor</span>(<span class="params">Node p, Node q</span>)</span> &#123;</span><br><span class="line">    Node a = p, b = q;</span><br><span class="line">    <span class="keyword">while</span> (a != b) &#123;</span><br><span class="line">        <span class="comment">// a从p开始向上走，走到根节点后，回到q继续</span></span><br><span class="line">        a = (a.parent == <span class="literal">null</span>) ? q : a.parent;</span><br><span class="line">        <span class="comment">// b从q开始向上走，走到根节点后，回到p继续</span></span><br><span class="line">        b = (b.parent == <span class="literal">null</span>) ? p : b.parent;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/04/03/%E5%8F%8C%E9%80%92%E5%BD%92/" rel="prev" title="LeetCode分享（双递归）">
+                  <i class="fa fa-chevron-left"></i> LeetCode分享（双递归）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/05/11/%E6%8E%92%E5%BA%8F%E4%B8%93%E9%A2%98/" rel="next" title="排序专题（时间复杂度O(n^2)级排序算法）">
+                  排序专题（时间复杂度O(n^2)级排序算法） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mrliduanyang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

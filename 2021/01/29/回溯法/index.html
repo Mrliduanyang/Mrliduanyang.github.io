@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;example.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Muse&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<meta name="description" content="本文会引导大家从一个具象的小例子出发来认识回溯法。  用一句歌词概括回溯法，那就是“向左向右向前看”。图中的小蓝要去找小绿，但是小蓝一开始并不知道小绿在哪里，所以他只能摸索着找。先向左走，找到了小红，但不是他想要的，于是退回来；然后向上走，找到了小黄，可也不是他想要的，只能再次退回来；最后向右走，终于找到了小绿，结束。 0.回溯法的本质先说结论，回溯法的本质是一棵N叉树的遍历。N叉树中除叶子节点外">
+<meta property="og:type" content="article">
+<meta property="og:title" content="回溯法总结">
+<meta property="og:url" content="http://example.com/2021/01/29/%E5%9B%9E%E6%BA%AF%E6%B3%95/index.html">
+<meta property="og:site_name" content="N.O的个人技术备忘">
+<meta property="og:description" content="本文会引导大家从一个具象的小例子出发来认识回溯法。  用一句歌词概括回溯法，那就是“向左向右向前看”。图中的小蓝要去找小绿，但是小蓝一开始并不知道小绿在哪里，所以他只能摸索着找。先向左走，找到了小红，但不是他想要的，于是退回来；然后向上走，找到了小黄，可也不是他想要的，只能再次退回来；最后向右走，终于找到了小绿，结束。 0.回溯法的本质先说结论，回溯法的本质是一棵N叉树的遍历。N叉树中除叶子节点外">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210104132211.png">
+<meta property="og:image" content="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210104150336.png">
+<meta property="article:published_time" content="2021-01-29T08:06:16.000Z">
+<meta property="article:modified_time" content="2021-05-11T05:09:11.816Z">
+<meta property="article:author" content="Mrliduanyang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210104132211.png">
+
+
+<link rel="canonical" href="http://example.com/2021/01/29/%E5%9B%9E%E6%BA%AF%E6%B3%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;01&#x2F;29&#x2F;%E5%9B%9E%E6%BA%AF%E6%B3%95&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;01&#x2F;29&#x2F;回溯法&#x2F;&quot;,&quot;title&quot;:&quot;回溯法总结&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>回溯法总结 | N.O的个人技术备忘</title><script src="/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">N.O的个人技术备忘</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%9B%9E%E6%BA%AF%E6%B3%95%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="nav-number">1.</span> <span class="nav-text">0.回溯法的本质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%9B%9E%E6%BA%AF%E6%B3%95%E6%A1%86%E6%9E%B6"><span class="nav-number">2.</span> <span class="nav-text">1.回溯法框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%9B%9E%E6%BA%AF%E6%B3%95%E5%AE%9E%E6%88%98"><span class="nav-number">3.</span> <span class="nav-text">2.回溯法实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-39-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 39. 组合总和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-46-%E5%85%A8%E6%8E%92%E5%88%97"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 46. 全排列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-78-%E5%AD%90%E9%9B%86"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 78. 子集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">3总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mrliduanyang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/29/%E5%9B%9E%E6%BA%AF%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mrliduanyang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="N.O的个人技术备忘">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          回溯法总结
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-29 16:06:16" itemprop="dateCreated datePublished" datetime="2021-01-29T16:06:16+08:00">2021-01-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-05-11 13:09:11" itemprop="dateModified" datetime="2021-05-11T13:09:11+08:00">2021-05-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文会引导大家从一个具象的小例子出发来认识回溯法。</p>
+<p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210104132211.png" alt="image-20210104132151868"></p>
+<p>用一句歌词概括回溯法，那就是<strong>“向左向右向前看”</strong>。图中的小蓝要去找小绿，但是小蓝一开始并不知道小绿在哪里，所以他只能摸索着找。先向左走，找到了小红，但不是他想要的，于是退回来；然后向上走，找到了小黄，可也不是他想要的，只能再次退回来；最后向右走，终于找到了小绿，结束。</p>
+<h2 id="0-回溯法的本质"><a href="#0-回溯法的本质" class="headerlink" title="0.回溯法的本质"></a>0.回溯法的本质</h2><p>先说结论，回溯法的本质是<strong>一棵N叉树的遍历</strong>。N叉树中除叶子节点外每个节点都有N个孩子节点，回到上图，如果将小蓝看做树中节点的话，那小红、小黄、小绿便是小蓝的孩子节点。如果有N个和小蓝同级的节点，并且他们连在同一个父节点上，以此重复，便可得到回溯法的<strong>解空间树</strong>。而小蓝在丁字路口的向左、向上、向右以及退回的操作便相当于回溯法中的<strong>选择和撤销选择</strong>，关于<strong>选择和撤销选择</strong>的概念在后文详解介绍。</p>
+<h2 id="1-回溯法框架"><a href="#1-回溯法框架" class="headerlink" title="1.回溯法框架"></a>1.回溯法框架</h2><p>我们把小蓝找小绿的难度加大，如下图所示：</p>
+<p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210104150336.png" alt="image-20210104150336916"></p>
+<p>小蓝初始站在Root位置，在他面前是一个十字路口，有1、2、3、4四个方向，并且沿每个方向走，又会遇到丁字路口，分别是5、6，7、8，9、10，11、12。<strong>小蓝的目标是找到12号小绿</strong>。我们先用文字来描述一下搜索过程。</p>
+<ul>
+<li>进入方向1<strong>（选择）</strong></li>
+<li>不是12号小绿<strong>（结束条件）</strong><ul>
+<li>进入方向5<strong>（选择）</strong></li>
+<li>不是12号小绿<strong>（结束条件）</strong></li>
+<li>从方向5退回<strong>（撤销选择）</strong></li>
+<li>进入方向6<strong>（选择）</strong></li>
+<li>不是12号小绿<strong>（结束条件）</strong></li>
+<li>从方向6退回<strong>（撤销选择）</strong></li>
+</ul>
+</li>
+<li>从方向1退回<strong>（撤销选择）</strong></li>
+<li>进入方向2<strong>（选择）</strong></li>
+<li>不是12号小绿<strong>（结束条件）</strong><ul>
+<li>进入方向7<strong>（选择）</strong></li>
+<li>不是12号小绿<strong>（结束条件）</strong></li>
+<li>从方向7退回<strong>（撤销选择）</strong></li>
+<li>进入方向8<strong>（选择）</strong></li>
+<li>不是12号小绿<strong>（结束条件）</strong></li>
+<li>从方向8退回<strong>（撤销选择）</strong></li>
+</ul>
+</li>
+<li>从方向2退回<strong>（撤销选择）</strong></li>
+<li>方向3和4类似操作</li>
+</ul>
+<p>总结这个搜索过程，我们先将同级的操作抽取出来，一共包含4部分：<strong>选择、结束条件、递归调用回溯、撤销选择</strong>，所以用代码来抽象上面这段搜索过程就是：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> res = [];</span><br><span class="line"><span class="keyword">var</span> path = [];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Backtrack</span>(<span class="params">选择列表</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (path满足结束条件) &#123;</span><br><span class="line">        res.Add(path);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (选择 <span class="keyword">in</span> 选择列表) &#123;</span><br><span class="line">        path.Add(选择);</span><br><span class="line">        Backtrack(新的选择列表);</span><br><span class="line">        path.Remove(选择);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Backtrack(初始选择列表);</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-回溯法实战"><a href="#2-回溯法实战" class="headerlink" title="2.回溯法实战"></a>2.回溯法实战</h2><p>我们基于以上小蓝找小绿的思路和总结的回溯法框架，来解决几道<strong>LeetCode</strong>上的回溯法题目。</p>
+<h3 id="2-1-39-组合总和"><a href="#2-1-39-组合总和" class="headerlink" title="2.1 39. 组合总和"></a>2.1 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combination-sum/">39. 组合总和</a></h3><blockquote>
+<p>给定一个无重复元素的数组 <code>candidates</code> 和一个目标数 <code>target</code> ，找出 <code>candidates</code> 中所有可以使数字和为 <code>target</code> 的组合。</p>
+<p><code>candidates</code> 中的数字可以无限制重复被选取。</p>
+<p><strong>说明：</strong></p>
+<ul>
+<li>所有数字（包括 <code>target</code>）都是正整数。</li>
+<li>解集不能包含重复的组合。 </li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<p><strong>输入：</strong>candidates = [2,3,6,7], target = 7,<br>所求解集为：<br>[<br>  [7],<br>  [2,2,3]<br>]</p>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;List&lt;<span class="built_in">int</span>&gt;&gt; CombinationSum(<span class="built_in">int</span>[] candidates, <span class="built_in">int</span> target) &#123;</span><br><span class="line">    <span class="comment">// candidates中无重复元素，但每个元素可用无限次</span></span><br><span class="line">    <span class="keyword">var</span> path = <span class="keyword">new</span> List&lt;<span class="built_in">int</span>&gt;();</span><br><span class="line">    <span class="keyword">var</span> res = <span class="keyword">new</span> List&lt;List&lt;<span class="built_in">int</span>&gt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Helper</span>(<span class="params"><span class="built_in">int</span> begin, <span class="built_in">int</span> sum</span>)</span> &#123;</span><br><span class="line">        <span class="comment">// 搜索结束条件，如果path中元素之和==target，说明path是一个有效答案</span></span><br><span class="line">        <span class="keyword">if</span> (sum == target) &#123;</span><br><span class="line">            res.Add(path.ToList());</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// begin用来指示本次回溯的选择起点，去重的关键</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = begin; i &lt; candidates.Length; i++) &#123;</span><br><span class="line">            <span class="comment">// 剪枝处理，减少不必要的回溯</span></span><br><span class="line">            <span class="keyword">if</span> ((sum + candidates[i]) &lt;= target) &#123;</span><br><span class="line">                <span class="comment">// 选择</span></span><br><span class="line">                path.Add(candidates[i]);</span><br><span class="line">                <span class="comment">// 递归调用回溯。因为candidates中元素可以无限次使用，所以在下一次选择时，依旧可以从当前元素开始</span></span><br><span class="line">                Helper(i, sum + candidates[i]);</span><br><span class="line">                <span class="comment">// 撤销选择</span></span><br><span class="line">                path.RemoveAt(path.Count - <span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (candidates.Length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    Helper(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>需要额外说的一点是关于代码中结果去重的处理，组合类问题是不区分顺序的，也就是说<code>[1, 2]</code>和<code>[2, 1]</code>是一个结果。去重的关键是在每次递归调用回溯时，新的选择列表从当前元素下标<code>i</code>开始，而不是从<code>0</code>开始。接下来分析，为什么这样处理可以去重。</p>
+<p>假如<code>candidates = [1, 2, 3, 5, 7]; target = 6</code>，递归到第一层时的选择列表是<code>[1, 2, 3, 5, 7]</code>，我们选择下标<code>0</code>位置的元素<code>1</code>，以<code>1</code>为选择的第二层递归从位置<code>0</code>开始选择，所以选择列表还是<code>[1, 2, 3, 5, 7]</code>，我们可以选择下标<code>1</code>位置的元素<code>2</code>，同样的，以<code>2</code>为选择的第二层递归从位置<code>1</code>开始选择，所以第三次选择列表是<code>[2, 3, 5, 7]</code>，我们可以选择<code>3</code>，这样我们就得到了一个<code>[1, 2, 3]</code>的答案。但如果在递归调用时选择列表都从<code>0</code>开始，即每次的选择列表都是<code>[1, 2, 3, 6, 7]</code>，那么会出现这样的情况，第一层递归时选择了<code>2</code>，第二层选择<code>3</code>，第三层选择<code>1</code>，得到<code>[2, 3, 1]</code>的答案；第一层选择了<code>3</code>，第二层选择<code>2</code>，第三层选择<code>1</code>，得到<code>[3, 2, 1]</code>的答案，但这两组答案是重复的。但如果加入新的选择列表从当前元素下标<code>i</code>开始的约束，就可以保证选择时不会选中当前元素之前的元素，从而避免上面的重复情况。</p>
+<h3 id="2-2-46-全排列"><a href="#2-2-46-全排列" class="headerlink" title="2.2 46. 全排列"></a>2.2 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/permutations/">46. 全排列</a></h3><blockquote>
+<p>给定一个 <strong>没有重复</strong> 数字的序列，返回其所有可能的全排列。</p>
+<p><strong>示例:</strong></p>
+<p><strong>输入：</strong> [1,2,3]<br><strong>输出：</strong><br>[<br>  [1,2,3],<br>  [1,3,2],<br>  [2,1,3],<br>  [2,3,1],<br>  [3,1,2],<br>  [3,2,1]<br>]</p>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;<span class="built_in">int</span>[]&gt; Permute(<span class="built_in">int</span>[] nums) &#123;</span><br><span class="line">    <span class="keyword">var</span> res = <span class="keyword">new</span> List&lt;<span class="built_in">int</span>[]&gt;();</span><br><span class="line">    <span class="keyword">var</span> path = <span class="keyword">new</span> List&lt;<span class="built_in">int</span>&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Helper</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (path.Count == nums.Length) &#123;</span><br><span class="line">            <span class="comment">// 搜索结束条件，如果nums中所有元素都在path中，说明找到一个全排列</span></span><br><span class="line">            res.Add(path.ToArray());</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">var</span> num <span class="keyword">in</span> nums) &#123;</span><br><span class="line">            <span class="comment">// 剪枝处理，如果路径中已存在元素num，则跳过</span></span><br><span class="line">            <span class="comment">// 这里的剪枝不是很高效，可以用hash表来记录该元素是否被添加过</span></span><br><span class="line">            <span class="keyword">if</span> (path.Contains(num)) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 做选择</span></span><br><span class="line">            path.Add(num);</span><br><span class="line">            <span class="comment">// 递归调用回溯</span></span><br><span class="line">            Helper();</span><br><span class="line">            <span class="comment">// 撤销选择</span></span><br><span class="line">            path.RemoveAt(path.Count - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    Helper();</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-78-子集"><a href="#2-3-78-子集" class="headerlink" title="2.3 78. 子集"></a>2.3 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subsets/">78. 子集</a></h3><blockquote>
+<p>给你一个整数数组 <code>nums</code> ，返回该数组所有可能的子集（幂集）。解集不能包含重复的子集。</p>
+<p><strong>示例 1：</strong></p>
+<p><strong>输入：</strong>nums = [1,2,3]<br><strong>输出：</strong>[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]</p>
+<p><strong>示例 2：</strong></p>
+<p><strong>输入：</strong>nums = [0]<br><strong>输出：</strong>[[],[0]]</p>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;List&lt;<span class="built_in">int</span>&gt;&gt; Subsets(<span class="built_in">int</span>[] nums) &#123;</span><br><span class="line">    <span class="keyword">var</span> path = <span class="keyword">new</span> List&lt;<span class="built_in">int</span>&gt;();</span><br><span class="line">    <span class="keyword">var</span> res = <span class="keyword">new</span> List&lt;List&lt;<span class="built_in">int</span>&gt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Helper</span>(<span class="params"><span class="built_in">int</span> begin</span>)</span> &#123;</span><br><span class="line">        <span class="comment">// 搜索结束条件，任意一个路径都是一个子集</span></span><br><span class="line">        res.Add(path.ToList());</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = begin; i &lt; nums.Length; i++) &#123;</span><br><span class="line">            <span class="comment">// 选择</span></span><br><span class="line">            path.Add(nums[i]);</span><br><span class="line">            <span class="comment">// 递归调用回溯，新的选择列表为当前元素位置之后的所有元素，所以在下一次选择时，从当前元素的下一个开始</span></span><br><span class="line">            Helper(i + <span class="number">1</span>);</span><br><span class="line">            <span class="comment">// 撤销选择</span></span><br><span class="line">            path.RemoveAt(path.Count - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (nums.Length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    Helper(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3总结"><a href="#3总结" class="headerlink" title="3总结"></a>3总结</h2><p>回溯法的框架很容易记住，但是针对每道题的细节处理会是一个很令人困扰的地方。在本文的实战部分，只给大家分享了三道经典的回溯法题目，分别是组合、排列、子集类的问题。至于他们的变种问题，更难的N皇后问题、解数独，以及回溯法中的细节处理，将在之后的文章中和大家分享。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/29/%E6%AF%8F%E5%A4%A9%E4%B8%80%E4%B8%AAMMDetection%E5%B0%8F%E6%8A%80%E5%B7%A7/" rel="prev" title="每天一个MMDetection小技巧">
+                  <i class="fa fa-chevron-left"></i> 每天一个MMDetection小技巧
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/03/13/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/" rel="next" title="LeetCode分享（单调队列+滑动窗口）">
+                  LeetCode分享（单调队列+滑动窗口） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mrliduanyang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
