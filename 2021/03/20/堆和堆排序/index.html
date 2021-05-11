@@ -7,23 +7,23 @@
 <meta name="generator" content="Hexo 5.4.0">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Mrliduanyang/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Mrliduanyang/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/Mrliduanyang/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/Mrliduanyang/blog/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/Mrliduanyang/blog/css/main.css">
 
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
-<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;example.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Mist&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;github.com&quot;,&quot;root&quot;:&quot;&#x2F;Mrliduanyang&#x2F;blog&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;Mrliduanyang&#x2F;blog&#x2F;images&quot;,&quot;scheme&quot;:&quot;Mist&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
 <meta name="description" content="相信很多读者在学习排序算法的时候，理解并背下了快速排序和归并排序的代码。而对于堆排序可能了解不多，对堆的印象可能只停留在大顶堆堆顶元素最大，小顶堆堆顶元素最小。但其实，堆排序才是个人认为的原理最简单、代码最简洁的一种优秀排序算法。 0. 完全二叉堆在深入了解堆之前，可以先想这么一个问题，堆长什么样？有的读者会觉得，（大顶）堆堆顶元素最大，然后它的左右孩子比它小，所以应该是树怎么存，它就怎么存吧。用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="堆和堆排序">
-<meta property="og:url" content="http://example.com/2021/03/20/%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:url" content="https://github.com/Mrliduanyang/blog/2021/03/20/%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/index.html">
 <meta property="og:site_name" content="N.O的个人技术备忘">
 <meta property="og:description" content="相信很多读者在学习排序算法的时候，理解并背下了快速排序和归并排序的代码。而对于堆排序可能了解不多，对堆的印象可能只停留在大顶堆堆顶元素最大，小顶堆堆顶元素最小。但其实，堆排序才是个人认为的原理最简单、代码最简洁的一种优秀排序算法。 0. 完全二叉堆在深入了解堆之前，可以先想这么一个问题，堆长什么样？有的读者会觉得，（大顶）堆堆顶元素最大，然后它的左右孩子比它小，所以应该是树怎么存，它就怎么存吧。用">
 <meta property="og:locale" content="zh_CN">
@@ -39,21 +39,21 @@
 <meta name="twitter:image" content="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20210320134454.png">
 
 
-<link rel="canonical" href="http://example.com/2021/03/20/%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/">
+<link rel="canonical" href="https://github.com/Mrliduanyang/blog/2021/03/20/%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;03&#x2F;20&#x2F;%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;03&#x2F;20&#x2F;堆和堆排序&#x2F;&quot;,&quot;title&quot;:&quot;堆和堆排序&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;github.com&#x2F;Mrliduanyang&#x2F;blog&#x2F;2021&#x2F;03&#x2F;20&#x2F;%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;03&#x2F;20&#x2F;堆和堆排序&#x2F;&quot;,&quot;title&quot;:&quot;堆和堆排序&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>堆和堆排序 | N.O的个人技术备忘</title><script src="/js/config.js"></script>
+<title>堆和堆排序 | N.O的个人技术备忘</title><script src="/Mrliduanyang/blog/js/config.js"></script>
   
 
 
 
 
   <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
+    <link rel="stylesheet" href="/Mrliduanyang/blog/css/noscript.css">
   </noscript>
 </head>
 
@@ -73,7 +73,7 @@
 
   <div class="site-meta">
 
-    <a href="/" class="brand" rel="start">
+    <a href="/Mrliduanyang/blog/" class="brand" rel="start">
       <i class="logo-line"></i>
       <h1 class="site-title">N.O的个人技术备忘</h1>
       <i class="logo-line"></i>
@@ -90,10 +90,10 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
-        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+        <li class="menu-item menu-item-home"><a href="/Mrliduanyang/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/Mrliduanyang/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-categories"><a href="/Mrliduanyang/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-commonweal"><a href="/Mrliduanyang/blog/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
   </ul>
 </nav>
 
@@ -136,13 +136,13 @@
 <div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives">
+          <a href="/Mrliduanyang/blog/archives">
           <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
+            <a href="/Mrliduanyang/blog/categories/">
           
         <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
@@ -151,7 +151,7 @@
 </div>
   <div class="links-of-author site-overview-item animated">
       <span class="links-of-author-item">
-        <a href="https://github.com/Mrliduanyang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Mrliduanyang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/Mrliduanyang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Mrliduanyang"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:duanyangchn@gmail.com" title="E-Mail → mailto:duanyangchn@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
@@ -191,10 +191,10 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/20/%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Mrliduanyang/blog/2021/03/20/%E5%A0%86%E5%92%8C%E5%A0%86%E6%8E%92%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/Mrliduanyang/blog/images/avatar.gif">
       <meta itemprop="name" content="Mrliduanyang">
       <meta itemprop="description" content="">
     </span>
@@ -230,11 +230,11 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+          <a href="/Mrliduanyang/blog/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+          <a href="/Mrliduanyang/blog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
         </span>
     </span>
 
@@ -309,12 +309,12 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/03/13/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86%E7%9A%84%E7%BB%9F%E4%B8%80%E5%86%99%E6%B3%95/" rel="prev" title="二叉树遍历的统一化写法">
+                <a href="/Mrliduanyang/blog/2021/03/13/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86%E7%9A%84%E7%BB%9F%E4%B8%80%E5%86%99%E6%B3%95/" rel="prev" title="二叉树遍历的统一化写法">
                   <i class="fa fa-chevron-left"></i> 二叉树遍历的统一化写法
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/03/25/%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%A0%91/" rel="next" title="LeetCode分享（序列化和反序列化树）">
+                <a href="/Mrliduanyang/blog/2021/03/25/%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%A0%91/" rel="next" title="LeetCode分享（序列化和反序列化树）">
                   LeetCode分享（序列化和反序列化树） <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
@@ -327,7 +327,7 @@
 
 
 
-<script src="/js/comments.js"></script>
+<script src="/Mrliduanyang/blog/js/comments.js"></script>
 </div>
   </main>
 
@@ -353,7 +353,7 @@
 
   
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+<script src="/Mrliduanyang/blog/js/utils.js"></script><script src="/Mrliduanyang/blog/js/motion.js"></script><script src="/Mrliduanyang/blog/js/schemes/muse.js"></script><script src="/Mrliduanyang/blog/js/next-boot.js"></script>
 
   
 
