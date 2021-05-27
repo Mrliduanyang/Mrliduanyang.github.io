@@ -126,7 +126,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives">
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -170,6 +170,110 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://mrliduanyang.github.io/blog/2021/05/27/%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Mrliduanyang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="N.O的个人技术备忘">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/blog/2021/05/27/%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">有趣的前端面试题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-05-27 12:37:37 / 修改时间：12:41:09" itemprop="dateCreated datePublished" datetime="2021-05-27T12:37:37+08:00">2021-05-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>最近在参加腾讯暑期实习生面试的时候，被问了一个题，题目是这样的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line">a.toString();</span><br></pre></td></tr></table></figure>
+
+<p>面试官问的是“变量<code>a</code>为什么能调用<code>toString()</code>方法？”。</p>
+<p>反正我当时是想了想，然后回答的是：“在调用时，会沿着<code>a</code>的原型链查找，直到找到<code>toString()</code>方法。”，然后面试官说：“<code>a</code>是原始值，也不是个对象，怎么找它的原型链呢？”然后我就懵了。</p>
+<p>下来之后，想深入研究一下这个问题，但却发现，甚至都没法在搜索引擎中输入这个对问题的描述。但好在在《JavaScript高级程序设计》里找到了答案。</p>
+<p>书上是这么说的：</p>
+<blockquote>
+<p>为了方便操作原始值，ECMAScript提供了3种特殊的引用类型：<code>Boolean</code>、<code>Number</code>和<code>String</code>。这些类型具有本章介绍的其他引用类型一样的特点，但也具有与各自原始类型对应的特殊行为。每当用到某个原始值的方法或属性时，后台都会创建一个相应原始包装类型的对象，从而暴露出操作原始值的各种方法。来看下面的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="string">&quot;some text&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> s2 = s1.substring(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在这里，<code>s1</code>是一个包含字符串的变量，它是一个原始值。第二行紧接着在<code>s1</code>上调用了<code>substring()</code>方法，并把结果保存在<code>s2</code>中。我们知道，原始值本身不是对象，因此逻辑上不应该有方法。而实际上这个例子又确实按照预期运行了。这是因为后台进行了很多处理，从而实现了上述操作。具体来说，当第二行访问<code>s1</code>时，是以读模式访问的，也就是从内存中读取变量保存的值。在以读模式访问字符串值的任何时候，后台都会执行以下3步：</p>
+<ol>
+<li>创建一个<code>String</code>类型的实例；</li>
+<li>调用实例上的特定方法；</li>
+<li>销毁实例。</li>
+</ol>
+<p>可以把这3步想象成执行了如下3行ECMAScript代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">&quot;some text&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> s2 = s1.substring(<span class="number">2</span>);</span><br><span class="line">s1 = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这种行为可以让原始值拥有对象的行为。对布尔值和数值而言，以上3步也会在后台发生，只不过使用的是<code>Boolean</code>和<code>Number</code>包装类型而已。</p>
+</blockquote>
+<p>了解完以上内容，就可以解决最开始的面试题了。当以读模式访问变量<code>a</code>时，会先创建与<code>a</code>对应的<code>Number</code>包装类型的实例，然后调用该实例上的<code>toString()</code>方法。</p>
+<p>但这是不是意味着可以像操作对象一样任意地给原始类型变量添加删除属性呢？不是的。接着来看书上的内容：</p>
+<blockquote>
+<p>引用类型与原始值包装类型的主要区别在于对象的生命周期。在通过<code>new</code>实例化引用类型后，得到的实例会在离开作用域时被销毁，而自动创建的原始值包装对象则只存在于访问它的那行代码执行期间。这意味着不能在运行时给原始值添加属性和方法。比如下面的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="string">&quot;some text&quot;</span>;</span><br><span class="line">s1.color = <span class="string">&quot;red&quot;</span>;</span><br><span class="line">consolel.log(s1.color);  <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>这里的第二行代码尝试给字符串<code>s1</code>添加一个<code>color</code>属性。可是，第三行代码访问<code>color</code>属性时它却不见了。原因就是第二行代码运行时会临时创建一个<code>String</code>对象，而当第三行代码执行时，这个对象已经被销毁了。实际上，第三行代码在这里创建了自己的<code>String</code>对象，但这个对象没有<code>color</code>属性。</p>
+</blockquote>
+<p>可以显式地使用<code>Boolean</code>、<code>Number</code>和<code>String</code>构造函数创建原始值包装对象。不过应该在确实必要时再这么做，否则容易让开发者疑惑，分不清它们到底是原始值还是引用值。在原始值包装类型的实例上调用<code>typeof</code>会返回<code>object</code>，所有原始值包装对象都会转换为布尔值<code>true</code>。虽然不推荐显式创建原始值包装类型的实例，但它们对于操作原始值的功能是很重要的。每个原始值包装类型都有相应的一套方法来方便数据操作。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1430,115 +1534,6 @@
 <h2 id="3-TensorWatch兼容性改造"><a href="#3-TensorWatch兼容性改造" class="headerlink" title="3.TensorWatch兼容性改造"></a>3.TensorWatch兼容性改造</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">analyze</span>(<span class="params">model: nn.Module, img, query_granularity: <span class="built_in">int</span></span>):</span></span><br><span class="line">    <span class="keyword">assert</span> <span class="built_in">isinstance</span>(model, nn.Module)</span><br><span class="line">    <span class="comment"># assert isinstance(input_size, (list, tuple))</span></span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        model(return_loss=<span class="literal">False</span>, rescale=<span class="literal">True</span>, **img)</span><br><span class="line">    <span class="comment"># some other codes</span></span><br></pre></td></tr></table></figure>
 
 <p>我们把原<strong>analyze</strong>中需要根据输入尺寸来生成的张量改为接收外部输入<strong>img</strong>，并取消<strong>input_size</strong>参数及相应的断言。这样以来，在<strong>TensorWatch</strong>中对<strong>model</strong>的调用即和<strong>MMDetection</strong>保持一致。又因为<strong>TensorWatch</strong>是借助<strong>PyTorch</strong>的<strong>Hook</strong>机制来实现对模型运行过程中各层数据的采集，因此上边的改造不会影响<strong>TensorWatch</strong>的分析结果。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://mrliduanyang.github.io/blog/2021/01/29/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97DNN%E6%8E%A8%E7%90%86%E5%8A%A0%E9%80%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Mrliduanyang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="N.O的个人技术备忘">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2021/01/29/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97DNN%E6%8E%A8%E7%90%86%E5%8A%A0%E9%80%9F/" class="post-title-link" itemprop="url">边缘计算DNN推理加速</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-01-29 16:06:16" itemprop="dateCreated datePublished" datetime="2021-01-29T16:06:16+08:00">2021-01-29</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-05-11 13:09:11" itemprop="dateModified" datetime="2021-05-11T13:09:11+08:00">2021-05-11</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93/" itemprop="url" rel="index"><span itemprop="name">论文总结</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>移动边缘计算(Multi-Access Edge Computing, MEC)是一种新兴的计算范式，将计算和存储能力“下沉”到网络边缘。越来越多的研究开始尝试在边缘侧部署应用，其中不乏一些计算密集型的深度神经网络(Deep Neural Networks, DNN)应用。但DNN模型的高算力需求和边缘侧设备的弱算力供应之间存在不可调和的矛盾，缓解矛盾的方式大体上有两种：1.优化DNN模型，在不降低模型性能的前提下减少计算量；2.充分调动边缘侧资源，加速DNN模型在边缘设备上的推理速度。本文就为大家总结了近三年移动边缘计算DNN推理加速的相关研究。</p>
-<h2 id="0-研究分类"><a href="#0-研究分类" class="headerlink" title="0.研究分类"></a>0.研究分类</h2><p>按照数据在DNN模型中的处理流程，可以将移动边缘计算DNN推理加速研究分为3大类：早期退出、模型划分、局部并行、全局并行。</p>
-<h2 id="1-早期退出"><a href="#1-早期退出" class="headerlink" title="1.早期退出"></a>1.早期退出</h2><h3 id="Adaptive-Parallel-Execution-of-Deep-Neural-Networks-on-Heterogeneous-Edge-Devices-ICDCS-2017"><a href="#Adaptive-Parallel-Execution-of-Deep-Neural-Networks-on-Heterogeneous-Edge-Devices-ICDCS-2017" class="headerlink" title="Adaptive Parallel Execution of Deep Neural Networks on Heterogeneous Edge Devices (ICDCS, 2017)"></a>Adaptive Parallel Execution of Deep Neural Networks on Heterogeneous Edge Devices (ICDCS, 2017)</h3><p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20201224143948.gif"></p>
-<p>该研究的思想很简单，但也十分有效。研究者认为，DNN模型推理不一定在最后一层才达到最高的精度，有可能在推理到中间某一层的时候，精度已经可以满足设定的阈值，此时推理就可以退出了，该层之后的计算都可以不用进行。极大地减少的计算量，自然整体推理速度就提高了。</p>
-<h2 id="2-模型划分-早期退出"><a href="#2-模型划分-早期退出" class="headerlink" title="2.模型划分+早期退出"></a>2.模型划分+早期退出</h2><h3 id="2-1-Edge-AI-On-Demand-Accelerating-Deep-Neural-Network-Inference-via-Edge-Computing-TWC-2020"><a href="#2-1-Edge-AI-On-Demand-Accelerating-Deep-Neural-Network-Inference-via-Edge-Computing-TWC-2020" class="headerlink" title="2.1 Edge AI: On-Demand Accelerating Deep Neural Network Inference via Edge Computing (TWC, 2020)"></a>2.1 Edge AI: On-Demand Accelerating Deep Neural Network Inference via Edge Computing (TWC, 2020)</h3><p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20201224144229.gif"></p>
-<p>该研究的关键点有两个：1.DNN划分，根据可用带宽在移动设备和边缘服务器之间自适应地对DNN计算进行划分，以便利用边缘服务器的计算能力；2.移动设备上模型早期退出，因为DNN划分后的执行性能仍然受到在移动设备上运行的模型的制约，可以通过早期退出中间DNN层的推理来加速整体推理。通过对DNN分区和 退出点调整进行联合优化，可以最大限度地提高准确性，同时保证延迟要求。</p>
-<h3 id="2-2-ADDA-Adaptive-Distributed-DNN-Inference-Acceleration-in-Edge-Computing-Environment-ICPADS-2019"><a href="#2-2-ADDA-Adaptive-Distributed-DNN-Inference-Acceleration-in-Edge-Computing-Environment-ICPADS-2019" class="headerlink" title="2.2 ADDA: Adaptive Distributed DNN Inference Acceleration in Edge Computing Environment (ICPADS, 2019)"></a>2.2 ADDA: Adaptive Distributed DNN Inference Acceleration in Edge Computing Environment (ICPADS, 2019)</h3><p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20201224144310.gif"></p>
-<p>该研究考虑了边缘计算执行框架优化的两个方面：1.DNN计算路径优化，构造多个DNN计算路径，在精度保证下实现不同输入数据推理的早期退出；2.DNN计算划分优化，考虑到边缘服务器的负载、网络带宽和延迟，对具有不同层划分的多路径DNN网络的总推理执行时间进行了分析和建模，可以实现终端设备和边缘服务器之间的动态最佳DNN分区，以进一步降低推理延迟。</p>
-<h2 id="3-模型划分"><a href="#3-模型划分" class="headerlink" title="3.模型划分"></a>3.模型划分</h2><h3 id="3-1-Dynamic-Adaptive-DNN-Surgery-for-Inference-Acceleration-on-the-Edge-INFOCOM-2019"><a href="#3-1-Dynamic-Adaptive-DNN-Surgery-for-Inference-Acceleration-on-the-Edge-INFOCOM-2019" class="headerlink" title="3.1 Dynamic Adaptive DNN Surgery for Inference Acceleration on the Edge (INFOCOM, 2019)"></a>3.1 Dynamic Adaptive DNN Surgery for Inference Acceleration on the Edge (INFOCOM, 2019)</h3><p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20201224144653.gif"></p>
-<p>该研究关注边缘侧和云的结合，认为DNN不同层的划分会导致不同的计算时间和传输时间，DNN的划分实际上是一种计算和传输之间的权衡，因此是存在最佳划分的。设计了动态自适应DNN划分方案，通过持续监控网络状况来优化DNN网络划分，以寻找具有动态网络条件的集成边缘和云计算环境中的最佳DNN分区。</p>
-<h3 id="3-2-Towards-Real-time-Cooperative-Deep-Inference-over-the-Cloud-and-Edge-End-Devices-Proceedings-of-the-ACM-on-Interactive-Mobile-Wearable-and-Ubiquitous-Technologies-2020"><a href="#3-2-Towards-Real-time-Cooperative-Deep-Inference-over-the-Cloud-and-Edge-End-Devices-Proceedings-of-the-ACM-on-Interactive-Mobile-Wearable-and-Ubiquitous-Technologies-2020" class="headerlink" title="3.2 Towards Real-time Cooperative Deep Inference over the Cloud and Edge End Devices (Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 2020)"></a>3.2 Towards Real-time Cooperative Deep Inference over the Cloud and Edge End Devices (Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 2020)</h3><p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20201224144735.png"></p>
-<p>该研究将DNN模型自适应划分为两部分，并在不同的设备上执行不同的部分，以最小化总推理延迟。研究者把最优DNN划分转化为有向无环图(DAG)中的最小割问题，并提出了一种新的两阶段快速深度模型划分(QDMP)方法来求解它。</p>
-<h3 id="3-3-Joint-Device-Edge-Inference-over-Wireless-Links-with-Pruning-SPAWC-2020"><a href="#3-3-Joint-Device-Edge-Inference-over-Wireless-Links-with-Pruning-SPAWC-2020" class="headerlink" title="3.3 Joint Device-Edge Inference over Wireless Links with Pruning (SPAWC, 2020)"></a>3.3 Joint Device-Edge Inference over Wireless Links with Pruning (SPAWC, 2020)</h3><p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20201224145224.gif"></p>
-<p>该研究考虑了结合网络剪枝，在给定信道条件和物联网设备计算约束条件下，找到最佳的DNN划分点和剪枝参数，以确保在给定场景下尽可能达到最佳的精度和效率。</p>
-<h3 id="3-4-JointDNN-An-Efficient-Training-and-Inference-Engine-for-Intelligent-Mobile-Cloud-Computing-Services-TMC-2018"><a href="#3-4-JointDNN-An-Efficient-Training-and-Inference-Engine-for-Intelligent-Mobile-Cloud-Computing-Services-TMC-2018" class="headerlink" title="3.4 JointDNN: An Efficient Training and Inference Engine for Intelligent Mobile Cloud Computing Services (TMC, 2018)"></a>3.4 JointDNN: An Efficient Training and Inference Engine for Intelligent Mobile Cloud Computing Services (TMC, 2018)</h3><p>该研究关注DNN在移动设备和云的联合平台中推理和训练，将DNN结构建模为一个有向无环图(DAG)，证明了在不同情况下，即最佳性能或能量消耗的最优计算调度问题，可以归结为多项式时间多种资源约束下的最短路径问题。</p>
-<p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20201224145309.png"></p>
-<h3 id="3-5-Auto-tuning-Neural-Network-Quantization-Framework-for-Collaborative-Inference-Between-the-Cloud-and-Edge-ICANN-2018"><a href="#3-5-Auto-tuning-Neural-Network-Quantization-Framework-for-Collaborative-Inference-Between-the-Cloud-and-Edge-ICANN-2018" class="headerlink" title="3.5 Auto-tuning Neural Network Quantization Framework for Collaborative Inference Between the Cloud and Edge (ICANN, 2018)"></a>3.5 Auto-tuning Neural Network Quantization Framework for Collaborative Inference Between the Cloud and Edge (ICANN, 2018)</h3><p>该研究对DNN的算子进行剖面，并生成候选图层作为划分点。当使用神经网络时，框架将自动调整网络划分。推理时，网络的第一部分在边缘设备上量化和执行以减少存储和计算，网络的第二部分全精度网络在云服务器中执行。</p>
-<p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20201224145342.gif"></p>
-<h2 id="4-局部并行"><a href="#4-局部并行" class="headerlink" title="4.局部并行"></a>4.局部并行</h2><h3 id="4-1-Fully-Distributed-Deep-Learning-Inference-on-Resource-Constrained-Edge-Devices-SAMOS-2019"><a href="#4-1-Fully-Distributed-Deep-Learning-Inference-on-Resource-Constrained-Edge-Devices-SAMOS-2019" class="headerlink" title="4.1 Fully Distributed Deep Learning Inference on Resource-Constrained Edge Devices (SAMOS, 2019)"></a>4.1 Fully Distributed Deep Learning Inference on Resource-Constrained Edge Devices (SAMOS, 2019)</h3><p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20201224145413.png" alt="484168_1_En_6_Fig6_HTML"></p>
-<p>该研究考虑了DNN模型划分后的数据通信开销，优化了覆盖DNN所有层分布式执行的存储、计算和通信需求。对于给定数量的边缘设备，该方案是联合应用的，以最小化设备之间的交换数据量，优化运行时间。</p>
-<h3 id="4-2-MeDNN-A-distributed-mobile-system-with-enhanced-partition-and-deployment-for-large-scale-DNNs-ICCAD-2017"><a href="#4-2-MeDNN-A-distributed-mobile-system-with-enhanced-partition-and-deployment-for-large-scale-DNNs-ICCAD-2017" class="headerlink" title="4.2 MeDNN: A distributed mobile system with enhanced partition and deployment for large-scale DNNs (ICCAD, 2017)"></a>4.2 MeDNN: A distributed mobile system with enhanced partition and deployment for large-scale DNNs (ICCAD, 2017)</h3><p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20201224145424.gif" alt="8203852-fig-3-source-large"></p>
-<p>该研究将MapReduce的概念用到分布式体系结构中，由Group Owner对特征图进行划分，并由每个Worker Node进行卷积计算，计算结果再由Group Owner进行归并以进行下一次计算。</p>
-<h3 id="4-3-Adaptive-parallel-execution-of-deep-neural-networks-on-heterogeneous-edge-device-SEC-2019"><a href="#4-3-Adaptive-parallel-execution-of-deep-neural-networks-on-heterogeneous-edge-device-SEC-2019" class="headerlink" title="4.3 Adaptive parallel execution of deep neural networks on heterogeneous edge device (SEC, 2019)"></a>4.3 Adaptive parallel execution of deep neural networks on heterogeneous edge device (SEC, 2019)</h3><p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20201224145548.png" alt="image-20201217164706537"></p>
-<p>该研究使用预测模型来预测DNN每一层在设备上的执行时间，并为每个划分选择最佳的划分点和并行化策略。</p>
-<h3 id="4-4-Distributed-Inference-Acceleration-with-Adaptive-DNN-Partitioning-and-Offloading-INFOCOM-2020"><a href="#4-4-Distributed-Inference-Acceleration-with-Adaptive-DNN-Partitioning-and-Offloading-INFOCOM-2020" class="headerlink" title="4.4 Distributed Inference Acceleration with Adaptive DNN Partitioning and Offloading (INFOCOM, 2020)"></a>4.4 Distributed Inference Acceleration with Adaptive DNN Partitioning and Offloading (INFOCOM, 2020)</h3><p>该研究提出了一个细粒度的自适应划分方案，将DNN分成比单个图层更小的部分从而减少网络中的通信开销。使用一种基于交换匹配的分布式算法将DNN推理从端设备卸载到雾网络中的节点。</p>
-<p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20201224145640.gif"></p>
-<h2 id="5-全局并行"><a href="#5-全局并行" class="headerlink" title="5.全局并行"></a>5.全局并行</h2><h3 id="5-1-DeepThings-Distributed-Adaptive-Deep-Learning-Inference-on-Resource-Constrained-IoT-Edge-Clusters-IEEE-Transactions-on-Computer-Aided-Design-of-Integrated-Circuits-and-Systems-2018"><a href="#5-1-DeepThings-Distributed-Adaptive-Deep-Learning-Inference-on-Resource-Constrained-IoT-Edge-Clusters-IEEE-Transactions-on-Computer-Aided-Design-of-Integrated-Circuits-and-Systems-2018" class="headerlink" title="5.1 DeepThings: Distributed Adaptive Deep Learning Inference on Resource-Constrained IoT Edge Clusters (IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, 2018)"></a>5.1 DeepThings: Distributed Adaptive Deep Learning Inference on Resource-Constrained IoT Edge Clusters (IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, 2018)</h3><p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20201224145658.png"></p>
-<p>该研究重点讨论能够执行早期卷积层的划分和分布方法，关键思想是将原始的CNN层分割成独立的可分配执行单元，DeepThings将动态平衡边缘集群之间的工作负载。</p>
-<h3 id="5-2-Adaptive-Distributed-Convolutional-Neural-Network-Inference-at-the-Network-Edge-with-ADCNN-ICPP-2020"><a href="#5-2-Adaptive-Distributed-Convolutional-Neural-Network-Inference-at-the-Network-Edge-with-ADCNN-ICPP-2020" class="headerlink" title="5.2 Adaptive Distributed Convolutional Neural Network Inference at the Network Edge with ADCNN (ICPP, 2020)"></a>5.2 Adaptive Distributed Convolutional Neural Network Inference at the Network Edge with ADCNN (ICPP, 2020)</h3><p><img src="https://gitee.com/molinchn/BlogImage/raw/master/duanyang/20201224145719.jpg"></p>
-<p>该研究提出了一种在动态边缘计算环境中运行CNN推理任务的新方法，将卷积层划分为许多小型的独立计算任务，根据边缘节点的当前条件动态地将分区任务分配给边缘节点，以进行并行处理，还提出一个压缩方案，进一步最大限度地降低跨层的通信成本。</p>
 
       
     </div>

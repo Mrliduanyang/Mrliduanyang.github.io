@@ -20,27 +20,27 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;mrliduanyang.github.io&quot;,&quot;root&quot;:&quot;&#x2F;blog&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;blog&#x2F;images&quot;,&quot;scheme&quot;:&quot;Mist&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
-<meta name="description" content="0x00 原理概述借助LocalStorage和onunload事件。LocalStorage中存储数据可以长期保留，除非被手动清除。浏览器在关闭页面和刷新页面时，都会触发onunload事件。所以可以在onunload事件中将时间戳存储在LocalStorage中，间接实现对页面刷新和关闭的判断。 0x01 实现123456789101112&lt;script&gt;    let lastT">
+<meta name="description" content="最近在参加腾讯暑期实习生面试的时候，被问了一个题，题目是这样的： 12let a &#x3D; 1;a.toString();  面试官问的是“变量a为什么能调用toString()方法？”。 反正我当时是想了想，然后回答的是：“在调用时，会沿着a的原型链查找，直到找到toString()方法。”，然后面试官说：“a是原始值，也不是个对象，怎么找它的原型链呢？”然后我就懵了。 下来之后，想深入研究一下这个问">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript判定浏览器中页面刷新与关闭标签页">
-<meta property="og:url" content="https://mrliduanyang.github.io/blog/2020/05/06/JavaScript%E5%88%A4%E5%AE%9A%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E9%A1%B5%E9%9D%A2%E5%88%B7%E6%96%B0%E4%B8%8E%E5%85%B3%E9%97%AD%E6%A0%87%E7%AD%BE%E9%A1%B5/index.html">
+<meta property="og:title" content="有趣的前端面试题">
+<meta property="og:url" content="https://mrliduanyang.github.io/blog/2021/05/27/%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
 <meta property="og:site_name" content="N.O的个人技术备忘">
-<meta property="og:description" content="0x00 原理概述借助LocalStorage和onunload事件。LocalStorage中存储数据可以长期保留，除非被手动清除。浏览器在关闭页面和刷新页面时，都会触发onunload事件。所以可以在onunload事件中将时间戳存储在LocalStorage中，间接实现对页面刷新和关闭的判断。 0x01 实现123456789101112&lt;script&gt;    let lastT">
+<meta property="og:description" content="最近在参加腾讯暑期实习生面试的时候，被问了一个题，题目是这样的： 12let a &#x3D; 1;a.toString();  面试官问的是“变量a为什么能调用toString()方法？”。 反正我当时是想了想，然后回答的是：“在调用时，会沿着a的原型链查找，直到找到toString()方法。”，然后面试官说：“a是原始值，也不是个对象，怎么找它的原型链呢？”然后我就懵了。 下来之后，想深入研究一下这个问">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-05-06T13:23:52.000Z">
-<meta property="article:modified_time" content="2021-05-11T05:09:11.816Z">
+<meta property="article:published_time" content="2021-05-27T04:37:37.000Z">
+<meta property="article:modified_time" content="2021-05-27T04:41:09.415Z">
 <meta property="article:author" content="Mrliduanyang">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://mrliduanyang.github.io/blog/2020/05/06/JavaScript%E5%88%A4%E5%AE%9A%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E9%A1%B5%E9%9D%A2%E5%88%B7%E6%96%B0%E4%B8%8E%E5%85%B3%E9%97%AD%E6%A0%87%E7%AD%BE%E9%A1%B5/">
+<link rel="canonical" href="https://mrliduanyang.github.io/blog/2021/05/27/%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;mrliduanyang.github.io&#x2F;blog&#x2F;2020&#x2F;05&#x2F;06&#x2F;JavaScript%E5%88%A4%E5%AE%9A%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E9%A1%B5%E9%9D%A2%E5%88%B7%E6%96%B0%E4%B8%8E%E5%85%B3%E9%97%AD%E6%A0%87%E7%AD%BE%E9%A1%B5&#x2F;&quot;,&quot;path&quot;:&quot;2020&#x2F;05&#x2F;06&#x2F;JavaScript判定浏览器中页面刷新与关闭标签页&#x2F;&quot;,&quot;title&quot;:&quot;JavaScript判定浏览器中页面刷新与关闭标签页&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;mrliduanyang.github.io&#x2F;blog&#x2F;2021&#x2F;05&#x2F;27&#x2F;%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;05&#x2F;27&#x2F;有意思的前端面试题&#x2F;&quot;,&quot;title&quot;:&quot;有趣的前端面试题&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>JavaScript判定浏览器中页面刷新与关闭标签页 | N.O的个人技术备忘</title><script src="/blog/js/config.js"></script>
+<title>有趣的前端面试题 | N.O的个人技术备忘</title><script src="/blog/js/config.js"></script>
   
 
 
@@ -105,7 +105,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -118,7 +118,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-%E5%8E%9F%E7%90%86%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">0x00 原理概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">0x01 实现</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -185,7 +184,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://mrliduanyang.github.io/blog/2020/05/06/JavaScript%E5%88%A4%E5%AE%9A%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E9%A1%B5%E9%9D%A2%E5%88%B7%E6%96%B0%E4%B8%8E%E5%85%B3%E9%97%AD%E6%A0%87%E7%AD%BE%E9%A1%B5/">
+    <link itemprop="mainEntityOfPage" href="https://mrliduanyang.github.io/blog/2021/05/27/%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -198,7 +197,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          JavaScript判定浏览器中页面刷新与关闭标签页
+          有趣的前端面试题
         </h1>
 
         <div class="post-meta-container">
@@ -208,16 +207,10 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-05-06 21:23:52" itemprop="dateCreated datePublished" datetime="2020-05-06T21:23:52+08:00">2020-05-06</time>
+      <time title="创建时间：2021-05-27 12:37:37 / 修改时间：12:41:09" itemprop="dateCreated datePublished" datetime="2021-05-27T12:37:37+08:00">2021-05-27</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-05-11 13:09:11" itemprop="dateModified" datetime="2021-05-11T13:09:11+08:00">2021-05-11</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -238,15 +231,37 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="0x00-原理概述"><a href="#0x00-原理概述" class="headerlink" title="0x00 原理概述"></a>0x00 原理概述</h2><p>借助LocalStorage和onunload事件。<br>LocalStorage中存储数据可以长期保留，除非被手动清除。<br>浏览器在关闭页面和刷新页面时，都会触发onunload事件。所以可以在onunload事件中将时间戳存储在LocalStorage中，间接实现对页面刷新和关闭的判断。</p>
-<h2 id="0x01-实现"><a href="#0x01-实现" class="headerlink" title="0x01 实现"></a>0x01 实现</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    let lastTime = localStorage.getItem(&#x27;lastTime&#x27;)</span><br><span class="line">    let currentTime = new Date().getTime()</span><br><span class="line">    if ((currentTime - lastTime) &lt; 5000) &#123;</span><br><span class="line">        console.log(&#x27;Refresh&#x27;)</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        console.log(&#x27;Close&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">    window.onunload = function () &#123;</span><br><span class="line">        localStorage.setItem(&#x27;lastTime&#x27;, new Date().getTime())</span><br><span class="line">    &#125; </span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+        <p>最近在参加腾讯暑期实习生面试的时候，被问了一个题，题目是这样的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line">a.toString();</span><br></pre></td></tr></table></figure>
 
-<p>代码分析：</p>
-<p>当页面第一次载入时，<code>locaStorage</code>中没有<code>lastTime</code>，所以<code>if</code>条件不成立，会先执行一次关闭时代码。</p>
-<p>当页面刷新时，首先触发<code>onunload</code>事件，在<code>onunload</code>中，将时间戳存放在<code>localStorage</code>中。之后页面开始刷新，刷新之后立即从<code>localStorage</code>中获取页面刷新前存放的时间戳<code>lastTime</code>，并与页面刷新后的时间戳<code>currentTime</code>做比较，若差值小于5000，则认为页面是刷新。</p>
-<p>当关闭页面时，首先触发<code>onunload</code>事件，在<code>onunload</code>中，将时间戳存放在<code>localStorage</code>中，之后页面被关闭。当页面再次被打开时立即从<code>localStorage</code>中获取页面刷新前存放的时间戳<code>lastTime</code>，并与当前页面的时间戳<code>currentTime</code>做比较，若差值大于5000，则认为之前页面被关闭，执行一次关闭时代码。</p>
-<p>代码也是有逻辑漏洞的。第一次加载时，便会执行关闭时代码；页面关闭后，其实是没有执行关闭时代码的，而是当下次再打开页面，判断和上次关闭的时间间隔大于阈值时才执行关闭时代码。也就是说，当打开、关闭页面的时间间隔小于阈值时，还是会被认为是刷新。当时间间隔大于阈值，才被认为是关闭。</p>
-<p>代码仅供参考。反正是实现了我的需求——在页面刷新时不清除<code>LocalStorage</code>中数据，在页面<code>关闭</code>时清除<code>LocalStorage</code>中数据。</p>
+<p>面试官问的是“变量<code>a</code>为什么能调用<code>toString()</code>方法？”。</p>
+<p>反正我当时是想了想，然后回答的是：“在调用时，会沿着<code>a</code>的原型链查找，直到找到<code>toString()</code>方法。”，然后面试官说：“<code>a</code>是原始值，也不是个对象，怎么找它的原型链呢？”然后我就懵了。</p>
+<p>下来之后，想深入研究一下这个问题，但却发现，甚至都没法在搜索引擎中输入这个对问题的描述。但好在在《JavaScript高级程序设计》里找到了答案。</p>
+<p>书上是这么说的：</p>
+<blockquote>
+<p>为了方便操作原始值，ECMAScript提供了3种特殊的引用类型：<code>Boolean</code>、<code>Number</code>和<code>String</code>。这些类型具有本章介绍的其他引用类型一样的特点，但也具有与各自原始类型对应的特殊行为。每当用到某个原始值的方法或属性时，后台都会创建一个相应原始包装类型的对象，从而暴露出操作原始值的各种方法。来看下面的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="string">&quot;some text&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> s2 = s1.substring(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在这里，<code>s1</code>是一个包含字符串的变量，它是一个原始值。第二行紧接着在<code>s1</code>上调用了<code>substring()</code>方法，并把结果保存在<code>s2</code>中。我们知道，原始值本身不是对象，因此逻辑上不应该有方法。而实际上这个例子又确实按照预期运行了。这是因为后台进行了很多处理，从而实现了上述操作。具体来说，当第二行访问<code>s1</code>时，是以读模式访问的，也就是从内存中读取变量保存的值。在以读模式访问字符串值的任何时候，后台都会执行以下3步：</p>
+<ol>
+<li>创建一个<code>String</code>类型的实例；</li>
+<li>调用实例上的特定方法；</li>
+<li>销毁实例。</li>
+</ol>
+<p>可以把这3步想象成执行了如下3行ECMAScript代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">&quot;some text&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> s2 = s1.substring(<span class="number">2</span>);</span><br><span class="line">s1 = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这种行为可以让原始值拥有对象的行为。对布尔值和数值而言，以上3步也会在后台发生，只不过使用的是<code>Boolean</code>和<code>Number</code>包装类型而已。</p>
+</blockquote>
+<p>了解完以上内容，就可以解决最开始的面试题了。当以读模式访问变量<code>a</code>时，会先创建与<code>a</code>对应的<code>Number</code>包装类型的实例，然后调用该实例上的<code>toString()</code>方法。</p>
+<p>但这是不是意味着可以像操作对象一样任意地给原始类型变量添加删除属性呢？不是的。接着来看书上的内容：</p>
+<blockquote>
+<p>引用类型与原始值包装类型的主要区别在于对象的生命周期。在通过<code>new</code>实例化引用类型后，得到的实例会在离开作用域时被销毁，而自动创建的原始值包装对象则只存在于访问它的那行代码执行期间。这意味着不能在运行时给原始值添加属性和方法。比如下面的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="string">&quot;some text&quot;</span>;</span><br><span class="line">s1.color = <span class="string">&quot;red&quot;</span>;</span><br><span class="line">consolel.log(s1.color);  <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>这里的第二行代码尝试给字符串<code>s1</code>添加一个<code>color</code>属性。可是，第三行代码访问<code>color</code>属性时它却不见了。原因就是第二行代码运行时会临时创建一个<code>String</code>对象，而当第三行代码执行时，这个对象已经被销毁了。实际上，第三行代码在这里创建了自己的<code>String</code>对象，但这个对象没有<code>color</code>属性。</p>
+</blockquote>
+<p>可以显式地使用<code>Boolean</code>、<code>Number</code>和<code>String</code>构造函数创建原始值包装对象。不过应该在确实必要时再这么做，否则容易让开发者疑惑，分不清它们到底是原始值还是引用值。在原始值包装类型的实例上调用<code>typeof</code>会返回<code>object</code>，所有原始值包装对象都会转换为布尔值<code>true</code>。虽然不推荐显式创建原始值包装类型的实例，但它们对于操作原始值的功能是很重要的。每个原始值包装类型都有相应的一套方法来方便数据操作。</p>
 
     </div>
 
@@ -260,14 +275,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/blog/2020/05/06/ElementUI%E5%BC%80%E5%8F%91CSS%E6%A0%B7%E5%BC%8F%E9%97%AE%E9%A2%98/" rel="prev" title="ElementUI开发CSS样式问题">
-                  <i class="fa fa-chevron-left"></i> ElementUI开发CSS样式问题
+                <a href="/blog/2021/05/11/%E6%8E%92%E5%BA%8F%E4%B8%93%E9%A2%98/" rel="prev" title="排序专题（时间复杂度O(n^2)级排序算法）">
+                  <i class="fa fa-chevron-left"></i> 排序专题（时间复杂度O(n^2)级排序算法）
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/blog/2020/06/14/%E5%BE%AE%E4%BF%A1JS-SDK%E7%AD%BE%E5%90%8D%E7%AE%97%E6%B3%95%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88/" rel="next" title="微信JS-SDK签名算法部署方案">
-                  微信JS-SDK签名算法部署方案 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
