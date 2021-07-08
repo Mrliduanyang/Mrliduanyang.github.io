@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;mrliduanyang.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Mist&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<meta name="description" content="最近在参加腾讯暑期实习生面试的时候，被问了一个题，题目是这样的： 12let a &#x3D; 1;a.toString();  面试官问的是“变量a为什么能调用toString()方法？”。 反正我当时是想了想，然后回答的是：“在调用时，会沿着a的原型链查找，直到找到toString()方法。”，然后面试官说：“a是原始值，也不是个对象，怎么找它的原型链呢？”然后我就懵了。 下来之后，想深入研究一下这个问">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有趣的前端面试题">
+<meta property="og:url" content="https://mrliduanyang.github.io/2021/05/27/%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
+<meta property="og:site_name" content="N.O的个人技术备忘">
+<meta property="og:description" content="最近在参加腾讯暑期实习生面试的时候，被问了一个题，题目是这样的： 12let a &#x3D; 1;a.toString();  面试官问的是“变量a为什么能调用toString()方法？”。 反正我当时是想了想，然后回答的是：“在调用时，会沿着a的原型链查找，直到找到toString()方法。”，然后面试官说：“a是原始值，也不是个对象，怎么找它的原型链呢？”然后我就懵了。 下来之后，想深入研究一下这个问">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-27T04:37:37.000Z">
+<meta property="article:modified_time" content="2021-07-08T12:03:43.094Z">
+<meta property="article:author" content="Mrliduanyang">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mrliduanyang.github.io/2021/05/27/%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;mrliduanyang.github.io&#x2F;2021&#x2F;05&#x2F;27&#x2F;%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;05&#x2F;27&#x2F;有意思的前端面试题&#x2F;&quot;,&quot;title&quot;:&quot;有趣的前端面试题&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>有趣的前端面试题 | N.O的个人技术备忘</title><script src="/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">N.O的个人技术备忘</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mrliduanyang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Mrliduanyang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Mrliduanyang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:duanyangchn@gmail.com" title="E-Mail → mailto:duanyangchn@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mrliduanyang.github.io/2021/05/27/%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mrliduanyang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="N.O的个人技术备忘">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          有趣的前端面试题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-27 12:37:37" itemprop="dateCreated datePublished" datetime="2021-05-27T12:37:37+08:00">2021-05-27</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-07-08 20:03:43" itemprop="dateModified" datetime="2021-07-08T20:03:43+08:00">2021-07-08</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>最近在参加腾讯暑期实习生面试的时候，被问了一个题，题目是这样的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line">a.toString();</span><br></pre></td></tr></table></figure>
+
+<p>面试官问的是“变量<code>a</code>为什么能调用<code>toString()</code>方法？”。</p>
+<p>反正我当时是想了想，然后回答的是：“在调用时，会沿着<code>a</code>的原型链查找，直到找到<code>toString()</code>方法。”，然后面试官说：“<code>a</code>是原始值，也不是个对象，怎么找它的原型链呢？”然后我就懵了。</p>
+<p>下来之后，想深入研究一下这个问题，但却发现，甚至都没法在搜索引擎中输入这个对问题的描述。但好在在《JavaScript高级程序设计》里找到了答案。</p>
+<p>书上是这么说的：</p>
+<blockquote>
+<p>为了方便操作原始值，ECMAScript提供了3种特殊的引用类型：<code>Boolean</code>、<code>Number</code>和<code>String</code>。这些类型具有本章介绍的其他引用类型一样的特点，但也具有与各自原始类型对应的特殊行为。每当用到某个原始值的方法或属性时，后台都会创建一个相应原始包装类型的对象，从而暴露出操作原始值的各种方法。来看下面的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="string">&quot;some text&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> s2 = s1.substring(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在这里，<code>s1</code>是一个包含字符串的变量，它是一个原始值。第二行紧接着在<code>s1</code>上调用了<code>substring()</code>方法，并把结果保存在<code>s2</code>中。我们知道，原始值本身不是对象，因此逻辑上不应该有方法。而实际上这个例子又确实按照预期运行了。这是因为后台进行了很多处理，从而实现了上述操作。具体来说，当第二行访问<code>s1</code>时，是以读模式访问的，也就是从内存中读取变量保存的值。在以读模式访问字符串值的任何时候，后台都会执行以下3步：</p>
+<ol>
+<li>创建一个<code>String</code>类型的实例；</li>
+<li>调用实例上的特定方法；</li>
+<li>销毁实例。</li>
+</ol>
+<p>可以把这3步想象成执行了如下3行ECMAScript代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">&quot;some text&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> s2 = s1.substring(<span class="number">2</span>);</span><br><span class="line">s1 = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这种行为可以让原始值拥有对象的行为。对布尔值和数值而言，以上3步也会在后台发生，只不过使用的是<code>Boolean</code>和<code>Number</code>包装类型而已。</p>
+</blockquote>
+<p>了解完以上内容，就可以解决最开始的面试题了。当以读模式访问变量<code>a</code>时，会先创建与<code>a</code>对应的<code>Number</code>包装类型的实例，然后调用该实例上的<code>toString()</code>方法。</p>
+<p>但这是不是意味着可以像操作对象一样任意地给原始类型变量添加删除属性呢？不是的。接着来看书上的内容：</p>
+<blockquote>
+<p>引用类型与原始值包装类型的主要区别在于对象的生命周期。在通过<code>new</code>实例化引用类型后，得到的实例会在离开作用域时被销毁，而自动创建的原始值包装对象则只存在于访问它的那行代码执行期间。这意味着不能在运行时给原始值添加属性和方法。比如下面的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="string">&quot;some text&quot;</span>;</span><br><span class="line">s1.color = <span class="string">&quot;red&quot;</span>;</span><br><span class="line">consolel.log(s1.color);  <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>这里的第二行代码尝试给字符串<code>s1</code>添加一个<code>color</code>属性。可是，第三行代码访问<code>color</code>属性时它却不见了。原因就是第二行代码运行时会临时创建一个<code>String</code>对象，而当第三行代码执行时，这个对象已经被销毁了。实际上，第三行代码在这里创建了自己的<code>String</code>对象，但这个对象没有<code>color</code>属性。</p>
+</blockquote>
+<p>可以显式地使用<code>Boolean</code>、<code>Number</code>和<code>String</code>构造函数创建原始值包装对象。不过应该在确实必要时再这么做，否则容易让开发者疑惑，分不清它们到底是原始值还是引用值。在原始值包装类型的实例上调用<code>typeof</code>会返回<code>object</code>，所有原始值包装对象都会转换为布尔值<code>true</code>。虽然不推荐显式创建原始值包装类型的实例，但它们对于操作原始值的功能是很重要的。每个原始值包装类型都有相应的一套方法来方便数据操作。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/05/11/%E6%8E%92%E5%BA%8F%E4%B8%93%E9%A2%98/" rel="prev" title="排序专题（时间复杂度O(n^2)级排序算法）">
+                  <i class="fa fa-chevron-left"></i> 排序专题（时间复杂度O(n^2)级排序算法）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/06/10/%E6%9C%89%E8%B6%A3%E7%9A%84%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%982/" rel="next" title="有趣的前端面试题II">
+                  有趣的前端面试题II <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">津ICP备20002882号 </a>
+  </div>
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mrliduanyang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;mrliduanyang.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Mist&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
+<meta name="description" content="提到二分法，很多人第一时间想到的肯定是应用在对有序数据的查找上，但转念一想，是不是也可以用来解决判定问题。一个最简单的例子就是我们经常玩的猜大小游戏，我们通常会往中间数值上来猜，比如第一次猜1，被告知猜小了，第二次猜100，被告知猜大了，那么在猜第三次的时候，我们可能就会去猜一个处在1和100中间的数值，比如50。不断重复上述过程，从而逐渐接近答案。是不是觉得很不可思议，我们竟然从小就会二分法了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二分法应用">
+<meta property="og:url" content="https://mrliduanyang.github.io/2021/07/08/%E4%BA%8C%E5%88%86%E6%B3%95%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="N.O的个人技术备忘">
+<meta property="og:description" content="提到二分法，很多人第一时间想到的肯定是应用在对有序数据的查找上，但转念一想，是不是也可以用来解决判定问题。一个最简单的例子就是我们经常玩的猜大小游戏，我们通常会往中间数值上来猜，比如第一次猜1，被告知猜小了，第二次猜100，被告知猜大了，那么在猜第三次的时候，我们可能就会去猜一个处在1和100中间的数值，比如50。不断重复上述过程，从而逐渐接近答案。是不是觉得很不可思议，我们竟然从小就会二分法了。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-08T12:08:26.000Z">
+<meta property="article:modified_time" content="2021-07-08T12:18:20.782Z">
+<meta property="article:author" content="Mrliduanyang">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mrliduanyang.github.io/2021/07/08/%E4%BA%8C%E5%88%86%E6%B3%95%E5%BA%94%E7%94%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;mrliduanyang.github.io&#x2F;2021&#x2F;07&#x2F;08&#x2F;%E4%BA%8C%E5%88%86%E6%B3%95%E5%BA%94%E7%94%A8&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;07&#x2F;08&#x2F;二分法应用&#x2F;&quot;,&quot;title&quot;:&quot;二分法应用&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>二分法应用 | N.O的个人技术备忘</title><script src="/js/config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">N.O的个人技术备忘</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#LeetCode-875-%E7%88%B1%E5%90%83%E9%A6%99%E8%95%89%E7%9A%84%E7%8F%82%E7%8F%82"><span class="nav-number">1.</span> <span class="nav-text">LeetCode 875. 爱吃香蕉的珂珂</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LeetCode-1011-%E5%9C%A8-D-%E5%A4%A9%E5%86%85%E9%80%81%E8%BE%BE%E5%8C%85%E8%A3%B9%E7%9A%84%E8%83%BD%E5%8A%9B"><span class="nav-number">2.</span> <span class="nav-text">LeetCode 1011. 在 D 天内送达包裹的能力</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LeetCode-1482-%E5%88%B6%E4%BD%9C-m-%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">LeetCode 1482. 制作 m 束花所需的最少天数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeetCode-875-%E7%88%B1%E5%90%83%E9%A6%99%E8%95%89%E7%9A%84%E7%8F%82%E7%8F%82-1"><span class="nav-number"></span> <span class="nav-text">LeetCode 875. 爱吃香蕉的珂珂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeetCode-1011-%E5%9C%A8-D-%E5%A4%A9%E5%86%85%E9%80%81%E8%BE%BE%E5%8C%85%E8%A3%B9%E7%9A%84%E8%83%BD%E5%8A%9B-1"><span class="nav-number"></span> <span class="nav-text">LeetCode 1011. 在 D 天内送达包裹的能力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeetCode-1482-%E5%88%B6%E4%BD%9C-m-%E6%9D%9F%E8%8A%B1%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E5%A4%A9%E6%95%B0-1"><span class="nav-number"></span> <span class="nav-text">LeetCode 1482. 制作 m 束花所需的最少天数</span></a></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mrliduanyang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Mrliduanyang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Mrliduanyang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:duanyangchn@gmail.com" title="E-Mail → mailto:duanyangchn@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mrliduanyang.github.io/2021/07/08/%E4%BA%8C%E5%88%86%E6%B3%95%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mrliduanyang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="N.O的个人技术备忘">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          二分法应用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-07-08 20:08:26 / 修改时间：20:18:20" itemprop="dateCreated datePublished" datetime="2021-07-08T20:08:26+08:00">2021-07-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>提到二分法，很多人第一时间想到的肯定是应用在对有序数据的查找上，但转念一想，是不是也可以用来解决判定问题。一个最简单的例子就是我们经常玩的猜大小游戏，我们通常会往中间数值上来猜，比如第一次猜1，被告知猜小了，第二次猜100，被告知猜大了，那么在猜第三次的时候，我们可能就会去猜一个处在1和100中间的数值，比如50。不断重复上述过程，从而逐渐接近答案。是不是觉得很不可思议，我们竟然从小就会二分法了。接下来我们来看几道二分法解决判定问题的例子，分别是LeetCode上的：</p>
+<ul>
+<li><h4 id="LeetCode-875-爱吃香蕉的珂珂"><a href="#LeetCode-875-爱吃香蕉的珂珂" class="headerlink" title="LeetCode 875. 爱吃香蕉的珂珂"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/koko-eating-bananas/">LeetCode 875. 爱吃香蕉的珂珂</a></h4></li>
+<li><h4 id="LeetCode-1011-在-D-天内送达包裹的能力"><a href="#LeetCode-1011-在-D-天内送达包裹的能力" class="headerlink" title="LeetCode 1011. 在 D 天内送达包裹的能力"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/capacity-to-ship-packages-within-d-days/">LeetCode 1011. 在 D 天内送达包裹的能力</a></h4></li>
+<li><h4 id="LeetCode-1482-制作-m-束花所需的最少天数"><a href="#LeetCode-1482-制作-m-束花所需的最少天数" class="headerlink" title="LeetCode 1482. 制作 m 束花所需的最少天数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-number-of-days-to-make-m-bouquets/">LeetCode 1482. 制作 m 束花所需的最少天数</a></h4></li>
+</ul>
+<h2 id="LeetCode-875-爱吃香蕉的珂珂-1"><a href="#LeetCode-875-爱吃香蕉的珂珂-1" class="headerlink" title="LeetCode 875. 爱吃香蕉的珂珂"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/koko-eating-bananas/">LeetCode 875. 爱吃香蕉的珂珂</a></h2><blockquote>
+<p>珂珂喜欢吃香蕉。这里有<code>N</code>堆香蕉，第<code>i</code>堆中有<code>piles[i]</code>根香蕉。警卫已经离开了，将在<code>H</code>小时后回来。</p>
+<p>珂珂可以决定她吃香蕉的速度<code>K</code>（单位：根/小时）。每个小时，她将会选择一堆香蕉，从中吃掉<code>K</code>根。如果这堆香蕉少于<code>K </code>根，她将吃掉这堆的所有香蕉，然后这一小时内不会再吃更多的香蕉。  </p>
+<p>珂珂喜欢慢慢吃，但仍然想在警卫回来前吃掉所有的香蕉。</p>
+<p>返回她可以在<code>H</code>小时内吃掉所有香蕉的最小速度<code>K</code>（<code>K</code> 为整数）。</p>
+<p><strong>示例 1：</strong></p>
+<p><strong>输入：</strong>piles = [3,6,7,11], H = 8<br><strong>输出：</strong>4</p>
+<p><strong>示例 2：</strong></p>
+<p><strong>输入：</strong>piles = [30,11,23,4,20], H = 5<br><strong>输出：</strong>30</p>
+<p><strong>示例 3：</strong></p>
+<p><strong>输入：</strong>piles = [30,11,23,4,20], H = 6<br><strong>输出：</strong>23</p>
+</blockquote>
+<p>先想想，是不是还是一个猜数字游戏呢？首先，存在一个吃香蕉的最小速度，一次就只吃一根；也存在一个最大速度，题目限制了珂珂一个小时之内只能选择一堆香蕉吃，所以最大速度就是数量最大的那堆香蕉的数量。</p>
+<p>知道了最小速度和最大速度以后就好办了，接下来我们就按照猜数字游戏的思路来寻找一个合适的速度，珂珂按照这个速度来吃恰好可满足题目要求。但在此之前，我们还需要解决一个问题，回想猜数字游戏，在我们猜完数字以后，会得到一个反馈，告诉我们猜的结果是大了还是小了。我们同样也要实现类似的功能函数，函数要能返回我们猜测的速度是大了还是小了。</p>
+<p>直接看代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public int MinEatingSpeed(int[] piles, int h) &#123;</span><br><span class="line">  	// 最小速度</span><br><span class="line">    var left = 1;</span><br><span class="line">  	// 最大速度</span><br><span class="line">    var right = piles.Max();</span><br><span class="line">  	// 二分法框架，左闭右开</span><br><span class="line">    while (left &lt; right) &#123;</span><br><span class="line">      	// 猜测的中间速度</span><br><span class="line">        var mid = left + (right - left) / 2;</span><br><span class="line">      	// 按照mid速度，吃饭所有香蕉所需的时间</span><br><span class="line">        var need = piles.Sum(pile =&gt; (pile - 1) / mid + 1);</span><br><span class="line">				// 二分法收缩边界。因为我们寻找的是最小速度，所以是寻找左边界的二分法写法，即当need == h时，也收缩右边界</span><br><span class="line">        if (need &lt;= h) &#123;</span><br><span class="line">            right = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            left = mid + 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="LeetCode-1011-在-D-天内送达包裹的能力-1"><a href="#LeetCode-1011-在-D-天内送达包裹的能力-1" class="headerlink" title="LeetCode 1011. 在 D 天内送达包裹的能力"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/capacity-to-ship-packages-within-d-days/">LeetCode 1011. 在 D 天内送达包裹的能力</a></h2><blockquote>
+<p>传送带上的包裹必须在 D 天内从一个港口运送到另一个港口。</p>
+<p>传送带上的第<code>i</code> 个包裹的重量为<code>weights[i]</code>。每一天，我们都会按给出重量的顺序往传送带上装载包裹。我们装载的重量不会超过船的最大运载重量。</p>
+<p>返回能在<code>D</code>天内将传送带上的所有包裹送达的船的最低运载能力。</p>
+<p><strong>示例 1：</strong></p>
+<p><strong>输入：</strong>weights = [1,2,3,4,5,6,7,8,9,10], D = 5<br><strong>输出：</strong>15<br><strong>解释：</strong><br>船舶最低载重 15 就能够在 5 天内送达所有包裹，如下所示：<br>第 1 天：1, 2, 3, 4, 5<br>第 2 天：6, 7<br>第 3 天：8<br>第 4 天：9<br>第 5 天：10</p>
+<p>请注意，货物必须按照给定的顺序装运，因此使用载重能力为 14 的船舶并将包装分成 (2, 3, 4, 5), (1, 6, 7), (8), (9), (10) 是不允许的。 </p>
+<p><strong>示例 2：</strong></p>
+<p><strong>输入：</strong>weights = [3,2,2,4,1,4], D = 3<br><strong>输出：</strong>6<br><strong>解释：</strong><br>船舶最低载重 6 就能够在 3 天内送达所有包裹，如下所示：<br>第 1 天：3, 2<br>第 2 天：2, 4<br>第 3 天：1, 4</p>
+<p><strong>示例 3：</strong></p>
+<p><strong>输入：</strong>weights = [1,2,3,1,1], D = 4<br><strong>输出：</strong>3<br><strong>解释：</strong><br>第 1 天：1<br>第 2 天：2<br>第 3 天：3<br>第 4 天：1, 1</p>
+</blockquote>
+<p>看代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public int ShipWithinDays(int[] weights, int D) &#123;</span><br><span class="line">  	// 最小运力</span><br><span class="line">    var left = weights.Max();</span><br><span class="line">  	// 最大运力</span><br><span class="line">    var right = weights.Sum();</span><br><span class="line">  	// 二分法框架，左闭右开</span><br><span class="line">    while (left &lt; right) &#123;</span><br><span class="line">        // 猜测的中间运力</span><br><span class="line">        var mid = left + (right - left) / 2;</span><br><span class="line">      	// 按照mid运力，运完包裹所需要的时间</span><br><span class="line">        int need = 1, cur = 0;</span><br><span class="line">        foreach (var weight in weights) &#123;</span><br><span class="line">            if (cur + weight &gt; mid) &#123;</span><br><span class="line">                ++need;</span><br><span class="line">                cur = 0;</span><br><span class="line">            &#125;</span><br><span class="line">            cur += weight;</span><br><span class="line">        &#125;</span><br><span class="line">				// 二分法收缩边界。因为我们寻找的是最低运力，所以是寻找左边界的二分法写法，即当need == D时，也收缩右边界</span><br><span class="line">        if (need &lt;= D) &#123;</span><br><span class="line">            right = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            left = mid + 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="LeetCode-1482-制作-m-束花所需的最少天数-1"><a href="#LeetCode-1482-制作-m-束花所需的最少天数-1" class="headerlink" title="LeetCode 1482. 制作 m 束花所需的最少天数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-number-of-days-to-make-m-bouquets/">LeetCode 1482. 制作 m 束花所需的最少天数</a></h2><blockquote>
+<p>给你一个整数数组<code>bloomDay</code>，以及两个整数<code>m</code>和<code> k</code>。</p>
+<p>现需要制作<code>m</code>束花。制作花束时，需要使用花园中<strong>相邻的<code>k</code>朵花</strong> 。</p>
+<p>花园中有<code>n</code>朵花，第<code>i</code>朵花会在<code>bloomDay[i]</code>时盛开，<strong>恰好</strong>可以用于<strong>一束</strong>花中。</p>
+<p>请你返回从花园中摘<code>m</code>束花需要等待的最少的天数。如果不能摘到<code>m</code>束花则返回**-1** 。</p>
+<p><strong>示例 1：</strong></p>
+<p><strong>输入：</strong>bloomDay = [1,10,3,10,2], m = 3, k = 1<br><strong>输出：</strong>3<br><strong>解释：</strong>让我们一起观察这三天的花开过程，x 表示花开，而 _ 表示花还未开。<br>现在需要制作 3 束花，每束只需要 1 朵。<br>1 天后：[x, _, _, _, _]   // 只能制作 1 束花<br>2 天后：[x, _, _, _, x]   // 只能制作 2 束花<br>3 天后：[x, _, x, _, x]   // 可以制作 3 束花，答案为 3</p>
+<p><strong>示例 2：</strong></p>
+<p><strong>输入：</strong>bloomDay = [1,10,3,10,2], m = 3, k = 2<br>输出：-1<br><strong>解释：</strong>要制作 3 束花，每束需要 2 朵花，也就是一共需要 6 朵花。而花园中只有 5 朵花，无法满足制作要求，返回 -1 。</p>
+<p><strong>示例 3：</strong></p>
+<p><strong>输入：</strong>bloomDay = [7,7,7,7,12,7,7], m = 2, k = 3<br><strong>输出：</strong>12<br><strong>解释：</strong>要制作 2 束花，每束需要 3 朵。<br>花园在 7 天后和 12 天后的情况如下：<br>7 天后：[x, x, x, x, _, x, x]<br>可以用前 3 朵盛开的花制作第一束花。但不能使用后 3 朵盛开的花，因为它们不相邻。<br>12 天后：[x, x, x, x, x, x, x]<br>显然，我们可以用不同的方式制作两束花。</p>
+<p><strong>示例 4：</strong></p>
+<p><strong>输入：</strong>bloomDay = [1000000000,1000000000], m = 1, k = 1<br><strong>输出：</strong>1000000000<br><strong>解释：</strong>需要等 1000000000 天才能采到花来制作花束</p>
+<p><strong>示例 5：</strong></p>
+<p><strong>输入：</strong>bloomDay = [1,10,2,9,3,8,4,7,5,6], m = 4, k = 2<br><strong>输出：</strong>9</p>
+</blockquote>
+<p>看代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">public int MinDays(int[] bloomDay, int m, int k) &#123;</span><br><span class="line">    if (m &gt; bloomDay.Length / k) &#123;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">		</span><br><span class="line">  	// 验证mid天能否完成制作</span><br><span class="line">    bool Check(int mid) &#123;</span><br><span class="line">        var bouquets = 0;</span><br><span class="line">        var flowers = 0;</span><br><span class="line">        var length = bloomDay.Length;</span><br><span class="line">        for (var i = 0; i &lt; length &amp;&amp; bouquets &lt; m; i++) &#123;</span><br><span class="line">            if (bloomDay[i] &lt;= mid) &#123;</span><br><span class="line">                flowers++;</span><br><span class="line">                if (flowers == k) &#123;</span><br><span class="line">                    bouquets++;</span><br><span class="line">                    flowers = 0;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                flowers = 0;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return bouquets &gt;= m;</span><br><span class="line">    &#125;</span><br><span class="line">		// 最少天数</span><br><span class="line">    var left = bloomDay.Min();</span><br><span class="line">  	// 最大天数</span><br><span class="line">    var right = bloomDay.Max();</span><br><span class="line">  	// 二分法框架，左闭右开</span><br><span class="line">    while (left &lt; right) &#123;</span><br><span class="line">      	// 猜测的中间天数</span><br><span class="line">        var mid = left + (right - left) / 2;</span><br><span class="line">      	// 二分法收缩边界。因为我们寻找的是最低运力，所以是寻找左边界的二分法写法</span><br><span class="line">        if (Check(mid)) &#123;</span><br><span class="line">            right = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            left = mid + 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return low;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/06/10/%E6%9C%89%E8%B6%A3%E7%9A%84%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%982/" rel="prev" title="有趣的前端面试题II">
+                  <i class="fa fa-chevron-left"></i> 有趣的前端面试题II
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">津ICP备20002882号 </a>
+  </div>
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mrliduanyang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
